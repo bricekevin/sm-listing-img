@@ -1,0 +1,16 @@
+sku	price	item-condition	quantity	add-delete	will-ship-internationally	merchant-shipping-group-name
+SMV-GEN-BLACK-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-BLACK-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-BLACK-ADB	149.00	11	100	a		Migrated Template
+SMV-GEN-GLOW-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-GOLD-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-GOLD-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-ORANGE-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-RAINBOW-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-RAINBOW-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-RED-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-RED-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-RED-ADB	149.00	11	100	a		Migrated Template
+SMV-GEN-WOOD-USBC	119.00	11	100	a		Migrated Template
+SMV-GEN-WOOD-STDB	139.00	11	100	a		Migrated Template
+SMV-GEN-WOOD-ADB	149.00	11	100	a		Migrated Template
