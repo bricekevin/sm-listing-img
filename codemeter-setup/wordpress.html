@@ -1,630 +1,377 @@
 <!-- codeMeter setup guide: paste this whole file into a WordPress Custom HTML block.
      Generated from marketing/setup/index.html by build_wordpress.py; edit index.html, not this file.
      Images load from https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/
-     Required files there: codex_login.png, codex_login_done.png, codex_login_expired.png, codex_reauth.png, codex_usage_alert.png, codex_usage_normal.png, onboard1.png, onboard2.png, portal_setup_claude.png, portal_setup_codex.png, usage_alert.png, usage_normal.png, wifi_error.png -->
+     Required files there: codex_login.png, codex_usage_alert.png, codex_usage_normal.png, onboard1.png, portal_setup_claude.png, portal_setup_codex.png, usage_alert.png, usage_normal.png -->
 <style>
 .cmsg{
-  --cm-bg:#FFFFFF; --cm-panel:#FAF7F3; --cm-panel2:#F2EDE6; --cm-line:#E7E0D6;
-  --cm-text:#1C1A17; --cm-dim:#5E5850; --cm-faint:#8C857B;
-  --cm-orange:#DA7756; --cm-orange-t:#B4552F; --cm-orange-wash:#FDF3EE;
-  --cm-blue:#58A6FF; --cm-blue-t:#1D63C4; --cm-blue-wash:#EEF5FF;
-  --cm-green:#2E9B57; --cm-amber:#C98A12; --cm-red:#C8483F;
-  background:var(--cm-bg);color:var(--cm-text);
+  --cm-text:#1C1A17; --cm-dim:#57524B; --cm-faint:#8A847B; --cm-line:#E6E1DA; --cm-soft:#F7F5F2;
+  --cm-cx:#1F63B4; --cm-cx-fill:#58A6FF; --cm-cx-wash:#EEF5FF;
+  --cm-cl:#C4623F; --cm-cl-fill:#DA7756; --cm-cl-wash:#FDF3EE;
+  --cm-acc:var(--cm-cx); --cm-acc-wash:var(--cm-cx-wash);
+  max-width:720px;margin:0 auto;padding:8px 20px 56px;background:#FFFFFF;color:var(--cm-text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-align:left;
+  font-size:16px;line-height:1.6;text-align:left;-webkit-font-smoothing:antialiased;
 }
 .cmsg *{box-sizing:border-box;}
-.cmsg h1,.cmsg h2,.cmsg h3,.cmsg h4,.cmsg p,.cmsg ul,.cmsg ol,.cmsg figure,.cmsg table{margin:0;padding:0;}
-.cmsg h1,.cmsg h2,.cmsg h3,.cmsg h4{color:var(--cm-text);font-family:inherit;text-transform:none;letter-spacing:-.01em;line-height:1.25;}
-.cmsg img{max-width:100%;height:auto;display:block;border:0;box-shadow:none;}
-.cmsg a{color:var(--cm-orange-t);text-decoration:underline;text-underline-offset:2px;}
-.cmsg code{background:var(--cm-panel2);border:1px solid var(--cm-line);border-radius:5px;padding:1px 6px;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:var(--cm-text);word-break:break-word;}
-.cmsg b{font-weight:700;}
-.cmsg p,.cmsg li,.cmsg dd,.cmsg td,.cmsg th{line-height:1.55;}
-.cmsg button{text-transform:none;letter-spacing:normal;line-height:inherit;box-shadow:none;min-height:0;width:auto;text-shadow:none;}
-.cmsg .cm-wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+.cmsg h2,.cmsg h3,.cmsg p,.cmsg ul,.cmsg ol,.cmsg figure,.cmsg dl,.cmsg dd{margin:0;padding:0;}
+.cmsg h2,.cmsg h3{font-family:inherit;color:var(--cm-text);text-transform:none;letter-spacing:-.01em;line-height:1.3;}
+.cmsg p,.cmsg li,.cmsg dd{line-height:1.6;}
+.cmsg img{display:block;max-width:100% !important;height:auto !important;border:0;border-radius:8px;box-shadow:none;}
+.cmsg a{color:var(--cm-acc);text-decoration:underline;text-underline-offset:2px;}
+.cmsg b{font-weight:650;}
+.cmsg code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9em;background:var(--cm-soft);
+  border:1px solid var(--cm-line);border-radius:5px;padding:1px 6px;color:var(--cm-text);word-break:break-word;}
+.cmsg button{font:inherit;text-transform:none;letter-spacing:normal;box-shadow:none;text-shadow:none;min-height:0;width:auto;line-height:1.2;}
 
-/* header */
-.cmsg .cm-top{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;}
-.cmsg .cm-brand{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--cm-orange);}
-.cmsg .cm-subtitle{color:var(--cm-dim);font-size:1.05rem;}
-.cmsg .cm-lede{color:var(--cm-dim);margin:12px 0 28px;font-size:1.06rem;max-width:640px;}
+/* --- service switch (radio inputs, so it works without JavaScript) ---- */
+.cmsg .cm-radio{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none;}
+.cmsg .cm-intro{color:var(--cm-dim);font-size:1.05rem;margin-bottom:18px;}
+.cmsg .cm-switch{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border:1px solid var(--cm-line);border-radius:999px;background:var(--cm-soft);margin-bottom:34px;max-width:100%;}
+.cmsg .cm-switch label{display:block;cursor:pointer;margin:0;padding:9px 20px;border-radius:999px;font-weight:600;font-size:.98rem;color:var(--cm-dim);line-height:1.2;user-select:none;}
+.cmsg .cm-switch label:hover{color:var(--cm-text);}
+.cmsg #cmsg-r-codex:checked ~ .cm-switch label[for="cmsg-r-codex"]{background:#fff;color:var(--cm-cx);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.cmsg #cmsg-r-claude:checked ~ .cm-switch label[for="cmsg-r-claude"]{background:#fff;color:var(--cm-cl);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.cmsg .cm-radio:focus-visible ~ .cm-switch{outline:2px solid var(--cm-text);outline-offset:2px;}
 
-/* section headings */
-.cmsg .cm-sec{margin-top:52px;scroll-margin-top:24px;}
-.cmsg .cm-h2{font-size:1.45rem;font-weight:750;margin-bottom:6px;}
-.cmsg .cm-sub{color:var(--cm-dim);margin-bottom:20px;}
+/* show only the selected service */
+.cmsg #cmsg-r-codex:checked ~ .cm-body .cm-cl-only{display:none !important;}
+.cmsg #cmsg-r-claude:checked ~ .cm-body .cm-cx-only{display:none !important;}
+.cmsg #cmsg-r-claude:checked ~ .cm-body{--cm-acc:var(--cm-cl);--cm-acc-wash:var(--cm-cl-wash);}
 
-/* service fork */
-.cmsg .cm-fork{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-.cmsg .cm-pick{display:flex;flex-direction:column;gap:10px;text-align:left;cursor:pointer;font:inherit;color:inherit;
-  background:var(--cm-panel);border:2px solid var(--cm-line);border-radius:16px;padding:18px 18px 16px;
-  transition:border-color .12s ease,transform .12s ease,background .12s ease;}
-.cmsg .cm-pick:hover{transform:translateY(-2px);}
-.cmsg .cm-pick:focus-visible{outline:3px solid var(--cm-text);outline-offset:2px;}
-.cmsg .cm-pick.cm-cx:hover,.cmsg[data-svc="codex"] .cm-pick.cm-cx{border-color:var(--cm-blue);background:var(--cm-blue-wash);}
-.cmsg .cm-pick.cm-cl:hover,.cmsg[data-svc="claude"] .cm-pick.cm-cl{border-color:var(--cm-orange);background:var(--cm-orange-wash);}
-.cmsg .cm-pick .cm-shot{background:#000;border-radius:10px;padding:6px;}
-.cmsg .cm-pick .cm-shot img{border-radius:5px;}
-.cmsg .cm-pick .cm-q{font-size:1.18rem;font-weight:750;}
-.cmsg .cm-pick.cm-cx .cm-q{color:var(--cm-blue-t);}
-.cmsg .cm-pick.cm-cl .cm-q{color:var(--cm-orange-t);}
-.cmsg .cm-pick .cm-d{color:var(--cm-dim);font-size:.93rem;}
-.cmsg .cm-pick .cm-go{font-weight:700;font-size:.92rem;}
-.cmsg .cm-pick.cm-cx .cm-go{color:var(--cm-blue-t);}
-.cmsg .cm-pick.cm-cl .cm-go{color:var(--cm-orange-t);}
-
-/* tables */
-.cmsg .cm-tablewrap{overflow-x:auto;border:1px solid var(--cm-line);border-radius:12px;}
-.cmsg table.cm-t{width:100%;border-collapse:collapse;font-size:.94rem;background:var(--cm-bg);border:0;}
-.cmsg table.cm-t th,.cmsg table.cm-t td{padding:11px 14px;border:0;border-top:1px solid var(--cm-line);vertical-align:top;text-align:left;}
-.cmsg table.cm-t thead th{border-top:0;background:var(--cm-panel);font-weight:700;}
-.cmsg table.cm-t tbody th{font-weight:600;color:var(--cm-dim);white-space:nowrap;}
-.cmsg table.cm-t .cm-cxh{color:var(--cm-blue-t);}
-.cmsg table.cm-t .cm-clh{color:var(--cm-orange-t);}
-
-/* steps */
-.cmsg .cm-pathbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--cm-panel);
-  border:1px solid var(--cm-line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:.93rem;color:var(--cm-dim);}
-.cmsg .cm-pathbar button{font:inherit;font-weight:600;cursor:pointer;border-radius:20px;padding:4px 14px;
-  border:1.5px solid var(--cm-line);background:var(--cm-bg);color:var(--cm-dim);}
-.cmsg[data-svc="codex"] .cm-pathbar button.cm-cx{border-color:var(--cm-blue);color:var(--cm-blue-t);background:var(--cm-blue-wash);}
-.cmsg[data-svc="claude"] .cm-pathbar button.cm-cl{border-color:var(--cm-orange);color:var(--cm-orange-t);background:var(--cm-orange-wash);}
-.cmsg[data-svc="both"] .cm-pathbar button.cm-both{border-color:var(--cm-text);color:var(--cm-text);background:var(--cm-panel2);}
-.cmsg .cm-step{display:grid;grid-template-columns:40px minmax(0,1fr) 260px;gap:8px 18px;padding:22px 0;border-top:1px solid var(--cm-line);align-items:start;}
+/* --- guide ------------------------------------------------------------ */
+.cmsg .cm-need{color:var(--cm-dim);margin:0 0 8px;}
+.cmsg .cm-need b{color:var(--cm-text);}
+.cmsg .cm-note{color:var(--cm-faint);font-size:.88rem;margin:0 0 8px;}
+.cmsg .cm-steps{list-style:none;margin:26px 0 0;padding:0;counter-reset:cmstep;}
+.cmsg .cm-step{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:28px;align-items:start;
+  padding:28px 0;border-top:1px solid var(--cm-line);margin:0;}
+.cmsg .cm-step.cm-noimg{grid-template-columns:minmax(0,1fr);}
 .cmsg .cm-step > div{min-width:0;}
-.cmsg .cm-step.cm-first{border-top:0;}
-.cmsg .cm-num{width:34px;height:34px;border-radius:50%;background:var(--cm-text);color:#fff;font-weight:800;
-  display:flex;align-items:center;justify-content:center;font-size:1rem;}
-.cmsg .cm-step.cm-cxs .cm-num{background:var(--cm-blue-t);}
-.cmsg .cm-step.cm-cls .cm-num{background:var(--cm-orange-t);}
-.cmsg .cm-step h3{font-size:1.15rem;font-weight:700;margin:4px 0 6px;}
-.cmsg .cm-step p{color:var(--cm-dim);margin-bottom:8px;}
+.cmsg .cm-step h3{display:flex;align-items:baseline;gap:12px;font-size:1.2rem;font-weight:700;margin:0 0 8px;}
+.cmsg .cm-step h3::before{counter-increment:cmstep;content:counter(cmstep);flex:none;width:28px;height:28px;border-radius:50%;
+  background:var(--cm-acc);color:#fff;font-size:.9rem;font-weight:700;display:inline-flex;align-items:center;justify-content:center;
+  position:relative;top:-2px;}
+.cmsg .cm-step p{color:var(--cm-dim);margin:0 0 10px;padding-left:40px;}
+.cmsg .cm-step ol{color:var(--cm-dim);margin:0 0 10px 40px;padding-left:20px;}
+.cmsg .cm-step ol li{margin:4px 0;}
+.cmsg .cm-step .cm-inner{padding-left:40px;}
 .cmsg .cm-step p:last-child{margin-bottom:0;}
-.cmsg .cm-step ol{color:var(--cm-dim);padding-left:22px;margin:6px 0 8px;}
-.cmsg .cm-step ol li{margin:5px 0;}
-.cmsg .cm-tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
-  border-radius:20px;padding:2px 9px;margin-bottom:2px;vertical-align:middle;}
-.cmsg .cm-tag.cm-cx{background:var(--cm-blue-wash);color:var(--cm-blue-t);}
-.cmsg .cm-tag.cm-cl{background:var(--cm-orange-wash);color:var(--cm-orange-t);}
-.cmsg .cm-media{display:flex;flex-direction:column;gap:10px;}
-.cmsg .cm-screen{background:#000;border-radius:12px;padding:7px;box-shadow:0 8px 20px rgba(40,30,20,.10);}
-.cmsg .cm-screen img{border-radius:6px;}
-.cmsg .cm-cap{font-size:.8rem;color:var(--cm-faint);text-align:center;margin-top:6px;}
-.cmsg .cm-phone{background:#1A1815;border-radius:18px;padding:8px;max-width:230px;margin:0 auto;box-shadow:0 8px 20px rgba(40,30,20,.12);}
-.cmsg .cm-phone img{border-radius:11px;}
-.cmsg .cm-tip{background:var(--cm-panel);border-left:3px solid var(--cm-text);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.92rem;color:var(--cm-dim);}
-.cmsg .cm-tip.cm-cx{border-left-color:var(--cm-blue);}
-.cmsg .cm-tip.cm-cl{border-left-color:var(--cm-orange);}
-.cmsg .cm-bigcode{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;
-  font-size:1.02rem;background:var(--cm-blue-wash);color:var(--cm-blue-t);border:1px solid #C9DDF7;border-radius:8px;padding:5px 12px;margin:2px 0 8px;}
-.cmsg .cm-done{display:flex;align-items:center;gap:12px;background:#EEF8F1;border:1px solid #CFE9D8;color:#1F6B3C;
-  border-radius:12px;padding:12px 16px;margin-top:22px;font-weight:600;}
+.cmsg .cm-fig{margin:0;}
+.cmsg .cm-fig img{background:#000;padding:5px;border-radius:10px !important;}
+.cmsg .cm-fig.cm-tall{max-width:190px;}
+.cmsg .cm-fig.cm-tall img{background:#1A1815;padding:6px;border-radius:14px !important;}
+.cmsg .cm-code{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;letter-spacing:.02em;
+  color:var(--cm-cx);background:var(--cm-cx-wash);border-radius:6px;padding:2px 10px;}
+.cmsg .cm-done{color:var(--cm-text) !important;font-weight:600;}
 
-/* Hide the other service's steps once a service is picked. With no pick (or
-   no JavaScript) both paths stay visible, each clearly tagged. */
-.cmsg[data-svc="codex"] .cm-only-claude{display:none !important;}
-.cmsg[data-svc="claude"] .cm-only-codex{display:none !important;}
-.cmsg[data-svc="codex"] .cm-only-unpicked,.cmsg[data-svc="claude"] .cm-only-unpicked{display:none !important;}
-/* Step 3 phone mock: one at a time. Codex until a service is picked; both
-   only when "Both" is chosen. */
-.cmsg:not([data-svc]) .cm-phone.cm-only-claude{display:none !important;}
+.cmsg .cm-cmd{display:flex;align-items:center;gap:8px;max-width:360px;margin:0 0 10px 40px;padding:5px 5px 5px 14px;
+  border:1px solid var(--cm-line);border-radius:8px;background:var(--cm-soft);}
+.cmsg .cm-cmd code{flex:1;min-width:0;background:none;border:0;padding:0;color:var(--cm-cl);font-size:1rem;white-space:nowrap;overflow-x:auto;}
+.cmsg .cm-btn{cursor:pointer;border:1px solid var(--cm-line);border-radius:6px;background:#fff;color:var(--cm-text);font-weight:600;font-size:.88rem;padding:7px 12px;}
+.cmsg .cm-btn:hover{border-color:var(--cm-faint);}
 
-/* overflow hardening: grid tracks and buttons must be allowed to shrink */
-.cmsg .cm-wrap,.cmsg .cm-fork > *,.cmsg .cm-read > *,.cmsg .cm-legend > *,.cmsg .cm-keys > *,.cmsg .cm-privacy > *{min-width:0;}
-.cmsg .cm-pick{width:100%;min-width:0;max-width:100%;white-space:normal;}
-.cmsg .cm-pick > span{display:block;max-width:100%;}
-.cmsg .cm-screen,.cmsg .cm-phone,.cmsg .cm-shot{max-width:100%;}
-.cmsg img{max-width:100% !important;height:auto !important;}
-.cmsg .cm-pathbar > *{flex:0 1 auto;}
+/* QR token helper (Claude only, collapsed) */
+.cmsg details.cm-qrhelp{margin:4px 0 0 40px;border:1px solid var(--cm-line);border-radius:10px;}
+.cmsg details.cm-qrhelp > summary{cursor:pointer;padding:10px 14px;font-weight:600;color:var(--cm-cl);list-style:none;}
+.cmsg details.cm-qrhelp > summary::-webkit-details-marker{display:none;}
+.cmsg details.cm-qrhelp > summary::before{content:"\25B8";display:inline-block;margin-right:8px;transition:transform .15s;}
+.cmsg details.cm-qrhelp[open] > summary::before{transform:rotate(90deg);}
+.cmsg .cm-qrbody{padding:0 14px 14px;}
+.cmsg .cm-qrbody p,.cmsg .cm-qrbody ol{padding-left:0;margin-left:0;}
+.cmsg .cm-qrbody ol{padding-left:20px;}
+.cmsg .cm-qrgrid{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px;align-items:start;margin-top:8px;}
+.cmsg .cm-qrgrid > div{min-width:0;}
+.cmsg .cm-qrbody textarea{display:block;width:100%;min-height:84px;resize:vertical;margin:0;padding:10px 12px;border:1px solid var(--cm-line);
+  border-radius:8px;background:#fff;color:var(--cm-text);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem;box-shadow:none;}
+.cmsg .cm-qrbody textarea:focus{outline:2px solid var(--cm-cl-fill);outline-offset:0;}
+.cmsg .cm-warn{color:#A4481F;font-size:.85rem;min-height:1.2em;margin-top:6px;}
+.cmsg .cm-qr{width:100%;aspect-ratio:1/1;background:#fff;border:1px solid var(--cm-line);border-radius:8px;padding:8px;}
+.cmsg .cm-qr svg{display:block;width:100%;height:auto;}
+.cmsg .cm-qr.cm-empty{display:flex;align-items:center;justify-content:center;text-align:center;color:var(--cm-faint);font-size:.82rem;background:var(--cm-soft);border-style:dashed;padding:14px;}
+.cmsg .cm-qrcap{color:var(--cm-faint);font-size:.8rem;margin-top:6px;word-break:break-word;}
+.cmsg .cm-private{color:var(--cm-faint);font-size:.85rem;margin-top:8px !important;}
 
-/* command + token helper */
-.cmsg .cm-cmd{display:flex;align-items:center;gap:8px;background:#1A1815;border-radius:9px;padding:5px 5px 5px 14px;margin:8px 0;max-width:420px;}
-.cmsg .cm-cmd code{flex:1;min-width:0;background:none;border:0;padding:0;color:#F0A07F;font-size:1rem;white-space:nowrap;overflow-x:auto;}
-.cmsg .cm-btn{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border:0;border-radius:7px;background:var(--cm-orange);color:#1A1815;padding:8px 14px;line-height:1.2;}
-.cmsg .cm-btn:hover{background:#C9663F;}
-.cmsg .cm-helper{background:#1A1815;color:#F5F0E8;border-radius:18px;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start;}
-.cmsg .cm-helper > div{min-width:0;}
-.cmsg .cm-helper h3{color:#F5F0E8;font-size:1.2rem;margin-bottom:6px;}
-.cmsg .cm-helper p{color:#BDB7AD;font-size:.94rem;margin-bottom:8px;}
-.cmsg .cm-helper ol{color:#BDB7AD;font-size:.94rem;padding-left:20px;margin:8px 0;}
-.cmsg .cm-helper ol li{margin:5px 0;}
-.cmsg .cm-helper b{color:#F5F0E8;}
-.cmsg .cm-helper code{background:#2A2723;border-color:#3A352C;color:#F0A07F;}
-.cmsg .cm-helper textarea{width:100%;min-height:92px;resize:vertical;margin:8px 0 0;background:#232019;border:1px solid #3A352C;
-  border-radius:9px;color:#F5F0E8;padding:11px 13px;font-size:.9rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:none;}
-.cmsg .cm-helper textarea:focus{outline:2px solid var(--cm-orange);outline-offset:0;}
-.cmsg .cm-warn{color:#E8A87C;font-size:.86rem;min-height:1.2em;margin-top:6px;}
-.cmsg .cm-qr{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:280px;margin:0 auto;}
-.cmsg .cm-qr svg{width:100%;height:auto;display:block;}
-.cmsg .cm-qr.cm-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:#232019;
-  border:1px dashed #3A352C;color:#9B9590;font-size:.9rem;text-align:center;padding:24px;}
-.cmsg .cm-qrcap{color:#9B9590;font-size:.84rem;text-align:center;margin-top:10px;word-break:break-word;}
-.cmsg .cm-lock{display:flex;gap:10px;background:#232019;border:1px solid #36322A;border-radius:10px;padding:10px 13px;margin-top:12px;font-size:.86rem;color:#BDB7AD;}
-.cmsg .cm-lock b{color:#7FCB8F;flex:none;}
+/* --- more help (collapsed sections) ------------------------------------ */
+.cmsg .cm-more{margin-top:40px;border-top:1px solid var(--cm-line);}
+.cmsg details.cm-sec{border-bottom:1px solid var(--cm-line);}
+.cmsg details.cm-sec > summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  padding:16px 2px;font-size:1.08rem;font-weight:650;color:var(--cm-text);}
+.cmsg details.cm-sec > summary::-webkit-details-marker{display:none;}
+.cmsg details.cm-sec > summary::after{content:"+";font-weight:400;font-size:1.4rem;line-height:1;color:var(--cm-faint);}
+.cmsg details.cm-sec[open] > summary::after{content:"\2212";}
+.cmsg .cm-secbody{padding:0 2px 22px;color:var(--cm-dim);}
+.cmsg .cm-secbody p{margin:0 0 10px;}
+.cmsg .cm-secbody ul{margin:0 0 10px;padding-left:20px;}
+.cmsg .cm-secbody li{margin:4px 0;}
+.cmsg .cm-secbody h3{font-size:1rem;font-weight:650;margin:16px 0 4px;}
+.cmsg .cm-secbody h3:first-child{margin-top:0;}
+.cmsg .cm-split{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:24px;align-items:start;}
+.cmsg .cm-split > div{min-width:0;}
+.cmsg .cm-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;position:relative;top:-1px;}
+.cmsg .cm-g{background:#2E9B57;} .cmsg .cm-a{background:#D69A1E;} .cmsg .cm-r{background:#C8483F;}
+.cmsg dl.cm-keys{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.4fr);gap:0;border:1px solid var(--cm-line);border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.cmsg dl.cm-keys > *{padding:10px 12px;border-top:1px solid var(--cm-line);margin:0;}
+.cmsg dl.cm-keys > .cm-kh{border-top:0;background:var(--cm-soft);font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--cm-faint);}
+.cmsg dl.cm-keys dt{font-weight:700;color:var(--cm-text);}
+.cmsg dl.cm-keys small{display:block;color:var(--cm-faint);font-size:.84rem;line-height:1.45;margin-top:2px;}
+.cmsg .cm-foot{color:var(--cm-faint);font-size:.85rem;margin-top:28px;}
+.cmsg .cm-foot p{margin:0 0 6px;}
 
-/* reading the screen */
-.cmsg .cm-read{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
-.cmsg .cm-legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.cmsg .cm-card{background:var(--cm-panel);border:1px solid var(--cm-line);border-radius:14px;padding:14px 16px;}
-.cmsg .cm-card h4{font-size:1rem;font-weight:700;margin-bottom:6px;}
-.cmsg .cm-card p,.cmsg .cm-card li{color:var(--cm-dim);font-size:.92rem;}
-.cmsg .cm-card ul{list-style:none;padding:0;margin:0;}
-.cmsg .cm-card li{display:flex;gap:9px;align-items:baseline;margin:5px 0;}
-.cmsg .cm-dot{flex:none;width:10px;height:10px;border-radius:50%;display:inline-block;position:relative;top:1px;}
-.cmsg .cm-dot.cm-g{background:var(--cm-green);} .cmsg .cm-dot.cm-a{background:var(--cm-amber);} .cmsg .cm-dot.cm-r{background:var(--cm-red);}
-.cmsg .cm-dot.cm-n{background:#fff;border:2px solid var(--cm-faint);}
-
-/* buttons */
-.cmsg .cm-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.cmsg .cm-key{background:var(--cm-panel);border:1px solid var(--cm-line);border-radius:14px;padding:14px 16px;}
-.cmsg .cm-key .cm-kl{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
-.cmsg .cm-key .cm-kb{width:34px;height:34px;border-radius:9px;background:#2A2723;color:#F5F0E8;font-weight:800;
-  display:flex;align-items:center;justify-content:center;}
-.cmsg .cm-key .cm-kp{font-size:.82rem;color:var(--cm-faint);}
-.cmsg .cm-key dl{margin:0;}
-.cmsg .cm-key dt{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cm-faint);margin-top:8px;}
-.cmsg .cm-key dd{margin:2px 0 0;color:var(--cm-text);font-size:.94rem;}
-.cmsg .cm-key dd small{display:block;color:var(--cm-dim);font-size:.84rem;margin-top:2px;}
-
-/* troubleshooting */
-.cmsg details.cm-faq{border:1px solid var(--cm-line);border-radius:12px;margin:10px 0;background:var(--cm-bg);}
-.cmsg details.cm-faq summary{cursor:pointer;padding:13px 16px;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:12px;}
-.cmsg details.cm-faq summary::-webkit-details-marker{display:none;}
-.cmsg details.cm-faq summary::after{content:"+";color:var(--cm-faint);font-weight:400;font-size:1.3rem;line-height:1;}
-.cmsg details.cm-faq[open] summary::after{content:"\2212";}
-.cmsg details.cm-faq .cm-ans{padding:0 16px 14px;color:var(--cm-dim);font-size:.95rem;}
-.cmsg details.cm-faq .cm-ans p{margin-bottom:8px;}
-.cmsg details.cm-faq .cm-ans ul{padding-left:20px;margin:6px 0;}
-.cmsg details.cm-faq .cm-ans li{margin:4px 0;}
-.cmsg .cm-inline-shot{float:right;width:190px;margin:2px 0 8px 16px;background:#000;border-radius:9px;padding:5px;}
-.cmsg .cm-inline-shot img{border-radius:5px;}
-.cmsg .cm-clear{clear:both;}
-
-/* privacy + footer */
-.cmsg .cm-privacy{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.cmsg .cm-foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--cm-line);color:var(--cm-faint);font-size:.85rem;}
-.cmsg .cm-foot p{margin-bottom:6px;}
-
-@media (max-width:760px){
-  .cmsg .cm-step{grid-template-columns:40px minmax(0,1fr);}
-  .cmsg .cm-step .cm-media{grid-column:2;max-width:340px;}
-  .cmsg .cm-helper{grid-template-columns:minmax(0,1fr);}
-  .cmsg .cm-keys{grid-template-columns:1fr;}
-}
-@media (max-width:600px){
-  .cmsg .cm-wrap{padding:28px 16px 64px;}
-  .cmsg .cm-fork,.cmsg .cm-read,.cmsg .cm-legend,.cmsg .cm-privacy{grid-template-columns:minmax(0,1fr);}
-  .cmsg .cm-step{grid-template-columns:34px minmax(0,1fr);gap:6px 12px;}
-  .cmsg .cm-num{width:30px;height:30px;font-size:.92rem;}
-  .cmsg .cm-inline-shot{float:none;width:100%;max-width:280px;margin:4px 0 10px;}
-  /* requirements table stacks: one card per row, each answer labeled */
-  .cmsg .cm-tablewrap{border:0;border-radius:0;overflow:visible;}
-  .cmsg table.cm-t thead{display:none;}
-  .cmsg table.cm-t,.cmsg table.cm-t tbody,.cmsg table.cm-t tr,.cmsg table.cm-t th,.cmsg table.cm-t td{display:block;width:100%;}
-  .cmsg table.cm-t tr{border:1px solid var(--cm-line);border-radius:12px;margin:0 0 10px;overflow:hidden;}
-  .cmsg table.cm-t tbody th{background:var(--cm-panel);border-top:0;white-space:normal;color:var(--cm-text);}
-  .cmsg table.cm-t td::before{content:attr(data-label);display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
-  .cmsg table.cm-t td.cm-tcx::before{color:var(--cm-blue-t);}
-  .cmsg table.cm-t td.cm-tcl::before{color:var(--cm-orange-t);}
-  .cmsg[data-svc="codex"] table.cm-t td.cm-tcl,.cmsg[data-svc="claude"] table.cm-t td.cm-tcx{display:none;}
-  .cmsg .cm-helper{padding:18px;}
+@media (max-width:640px){
+  .cmsg{padding:4px 16px 44px;}
+  .cmsg .cm-step{grid-template-columns:minmax(0,1fr);gap:14px;padding:24px 0;}
+  .cmsg .cm-step .cm-fig{order:-1;max-width:280px;}
+  .cmsg .cm-step .cm-fig.cm-tall{max-width:190px;}
+  .cmsg .cm-step p,.cmsg .cm-step .cm-inner{padding-left:0;}
+  .cmsg .cm-step ol{margin-left:0;}
+  .cmsg .cm-cmd,.cmsg details.cm-qrhelp{margin-left:0;}
+  .cmsg .cm-qrgrid{grid-template-columns:minmax(0,1fr);}
+  .cmsg .cm-qr{max-width:220px;}
+  .cmsg .cm-split{grid-template-columns:minmax(0,1fr);}
+  .cmsg .cm-split .cm-fig{max-width:280px;}
+  .cmsg dl.cm-keys{grid-template-columns:auto minmax(0,1fr);}
+  .cmsg dl.cm-keys .cm-kh{display:none;}
+  .cmsg dl.cm-keys dd.cm-tap{border-top:1px solid var(--cm-line);}
+  .cmsg dl.cm-keys dd.cm-hold{grid-column:2;border-top:0;padding-top:0;}
+  .cmsg dl.cm-keys dt{grid-row:span 2;}
 }
 </style>
 
 <div class="cmsg" id="cmsg">
-<div class="cm-wrap">
+  <input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-codex" value="codex" checked>
+  <input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-claude" value="claude">
 
-  <header class="cm-top">
-    <span class="cm-brand">codeMeter</span><span class="cm-subtitle">Setup Guide</span>
-  </header>
-  <p class="cm-lede">Get your codeMeter showing live usage in about five minutes. Everything
-  happens on your phone. First, which service do you use?</p>
+  <p class="cm-intro">Pick the service you use, then follow the steps. It takes about five minutes.</p>
 
-  <!-- FORK -->
-  <div class="cm-fork" role="group" aria-label="Choose your service">
-    <button type="button" class="cm-pick cm-cx" data-pick="codex">
-      <span class="cm-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_normal.png" alt="codeMeter showing OpenAI Codex usage in its blue theme" width="1280" height="960"></span>
-      <span class="cm-q">Using OpenAI Codex?</span>
-      <span class="cm-d">A ChatGPT plan that includes Codex. Nothing to copy or paste: you sign in
-      with a short code shown on the device.</span>
-      <span class="cm-go">Show the Codex steps &darr;</span>
-    </button>
-    <button type="button" class="cm-pick cm-cl" data-pick="claude">
-      <span class="cm-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_normal.png" alt="codeMeter showing Claude Code usage in its orange theme" width="1280" height="960"></span>
-      <span class="cm-q">Using Claude Code?</span>
-      <span class="cm-d">A paid Claude plan, Pro or Max. You'll use a computer once to create a
-      token with <code>claude setup-token</code>.</span>
-      <span class="cm-go">Show the Claude steps &darr;</span>
-    </button>
+  <div class="cm-switch" role="radiogroup" aria-label="Service">
+    <label for="cmsg-r-codex">OpenAI Codex</label>
+    <label for="cmsg-r-claude">Claude Code</label>
   </div>
 
-  <!-- REQUIREMENTS -->
-  <section class="cm-sec" id="cmsg-need">
-    <h2 class="cm-h2">What you need</h2>
-    <p class="cm-sub">Check this before you start. One device shows one service at a time, and you can switch later.</p>
-    <div class="cm-tablewrap">
-      <table class="cm-t">
-        <thead><tr><th></th><th class="cm-cxh">OpenAI Codex</th><th class="cm-clh">Claude Code</th></tr></thead>
-        <tbody>
-          <tr><th>Plan</th>
-            <td class="cm-tcx" data-label="OpenAI Codex">A ChatGPT plan that includes Codex. Verified on <b>ChatGPT Plus</b>; personal plans such as Pro use the same sign-in. Business and Enterprise workspaces are not verified yet.</td>
-            <td class="cm-tcl" data-label="Claude Code">A paid Claude plan, <b>Pro or Max</b>. Team and Enterprise accounts show a monthly usage view instead of the 5-hour and weekly bars.</td></tr>
-          <tr><th>Computer</th><td class="cm-tcx" data-label="OpenAI Codex">Not needed</td><td class="cm-tcl" data-label="Claude Code">Once, with the Claude CLI installed, to run <code>claude setup-token</code></td></tr>
-          <tr><th>Something to paste</th><td class="cm-tcx" data-label="OpenAI Codex">Nothing</td><td class="cm-tcl" data-label="Claude Code">One token</td></tr>
-          <tr><th>Phone</th><td class="cm-tcx" data-label="OpenAI Codex">Yes</td><td class="cm-tcl" data-label="Claude Code">Yes</td></tr>
-          <tr><th>Wi-Fi</th><td class="cm-tcx" data-label="OpenAI Codex">2.4 GHz with a WPA2 password</td><td class="cm-tcl" data-label="Claude Code">2.4 GHz with a WPA2 password</td></tr>
-          <tr><th>Power</th><td class="cm-tcx" data-label="OpenAI Codex">Any USB-C cable and charger</td><td class="cm-tcl" data-label="Claude Code">Any USB-C cable and charger</td></tr>
-        </tbody>
-      </table>
+  <div class="cm-body">
+
+    <!-- ================= CODEX GUIDE ================= -->
+    <section class="cm-cx-only" id="codex-guide">
+      <p class="cm-need"><b>You'll need:</b> a ChatGPT plan that includes Codex, your phone, and 2.4 GHz Wi-Fi.</p>
+      <p class="cm-note">Verified on ChatGPT Plus. Business and Enterprise workspaces are not verified yet.</p>
+
+      <ol class="cm-steps">
+        <li class="cm-step">
+          <div>
+            <h3>Plug in and join its Wi-Fi</h3>
+            <p>Power codeMeter with a USB-C cable. When it shows <b>STEP 1</b>, scan the QR code with your phone's
+            camera, or join the Wi-Fi network <b>codeMeter-XXXXXX</b> shown on the screen.</p>
+          </div>
+          <figure class="cm-fig"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard1.png" alt="codeMeter STEP 1 screen with a Wi-Fi QR code" width="1280" height="960" loading="lazy"></figure>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>Choose OpenAI Codex and your Wi-Fi</h3>
+            <p>A setup page opens on your phone. If it doesn't, go to <code>http://192.168.4.1</code>.</p>
+            <ol>
+              <li>Tap <b>Setup Device</b>.</li>
+              <li>Under "Which do you use?" tap <b>OpenAI Codex</b>.</li>
+              <li>Choose your home Wi-Fi, enter its password, and tap <b>Save</b>.</li>
+            </ol>
+          </div>
+          <figure class="cm-fig cm-tall"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_codex.png" alt="Setup page with OpenAI Codex selected" width="760" height="1216" loading="lazy"></figure>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>Sign in with the code on the screen</h3>
+            <p>codeMeter restarts and shows a blue <b>SIGN IN</b> screen with a code like <span class="cm-code">KQX4-7HRTM</span>.</p>
+            <ol>
+              <li>On your phone (back on your normal Wi-Fi), open
+              <a href="https://auth.openai.com/codex/device" target="_blank" rel="noopener">auth.openai.com/codex/device</a>
+              or scan the QR on the screen.</li>
+              <li>Sign in to ChatGPT.</li>
+              <li>Type the code and approve.</li>
+            </ol>
+            <p>The code lasts 15 minutes. If it expires, press <b>B</b> for a new one.</p>
+          </div>
+          <figure class="cm-fig"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login.png" alt="Blue SIGN IN screen with a QR code and a sign-in code" width="1280" height="960" loading="lazy"></figure>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>You're all set</h3>
+            <p>Your <b>5h limit</b> and <b>Weekly limit</b> appear within seconds and refresh every minute.
+            codeMeter now runs on its own; your phone isn't needed.</p>
+          </div>
+          <figure class="cm-fig"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_normal.png" alt="codeMeter showing Codex 5h and weekly usage" width="1280" height="960" loading="lazy"></figure>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= CLAUDE GUIDE ================= -->
+    <section class="cm-cl-only" id="claude-guide">
+      <p class="cm-need"><b>You'll need:</b> a Claude Pro or Max plan, a computer with the Claude CLI (once), your phone, and 2.4 GHz Wi-Fi.</p>
+      <p class="cm-note">Team and Enterprise accounts show a monthly usage view instead of the 5-hour and weekly bars.</p>
+
+      <ol class="cm-steps">
+        <li class="cm-step cm-noimg">
+          <div>
+            <h3>Get your Claude token</h3>
+            <p>On your computer, open a terminal and run:</p>
+            <div class="cm-cmd"><code id="cmsg-cmd">claude setup-token</code><button type="button" class="cm-btn" id="cmsg-copy">Copy</button></div>
+            <p>Log in when the browser opens. It prints a long token starting with <code>sk-ant-oat01-</code>. Copy it
+            and send it to your phone (for example, email it to yourself). You only do this once.</p>
+          </div>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>Plug in and join its Wi-Fi</h3>
+            <p>Power codeMeter with a USB-C cable. When it shows <b>STEP 1</b>, scan the QR code with your phone's
+            camera, or join the Wi-Fi network <b>codeMeter-XXXXXX</b> shown on the screen.</p>
+          </div>
+          <figure class="cm-fig"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard1.png" alt="codeMeter STEP 1 screen with a Wi-Fi QR code" width="1280" height="960" loading="lazy"></figure>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>Choose Claude Code, your Wi-Fi, and paste the token</h3>
+            <p>A setup page opens on your phone. If it doesn't, go to <code>http://192.168.4.1</code>.</p>
+            <ol>
+              <li>Tap <b>Setup Device</b>. <b>Claude Code</b> is already selected.</li>
+              <li>Choose your home Wi-Fi and enter its password.</li>
+              <li>Paste the token into <b>Claude token</b> and tap <b>Save</b>.</li>
+            </ol>
+            <details class="cm-qrhelp">
+              <summary>Prefer scanning a QR?</summary>
+              <div class="cm-qrbody">
+                <p>Paste the token here on your computer. With your phone on the <b>codeMeter-XXXXXX</b> Wi-Fi, scan the
+                QR and open the link. If the phone says <b>Token saved</b>, finish the Wi-Fi on the setup page and
+                leave the token box empty.</p>
+                <div class="cm-qrgrid">
+                  <div>
+                    <textarea id="cmsg-token" placeholder="sk-ant-oat01-..." autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Claude token"></textarea>
+                    <div class="cm-warn" id="cmsg-warn" role="status"></div>
+                    <p class="cm-private">Made in your browser. The token is never uploaded.</p>
+                  </div>
+                  <div>
+                    <div class="cm-qr cm-empty" id="cmsg-qr">QR appears here</div>
+                    <div class="cm-qrcap" id="cmsg-qrcap"></div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </div>
+          <figure class="cm-fig cm-tall"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_claude.png" alt="Setup page with Claude Code selected and the Claude token box" width="760" height="1519" loading="lazy"></figure>
+        </li>
+
+        <li class="cm-step">
+          <div>
+            <h3>You're all set</h3>
+            <p>codeMeter restarts and shows your <b>Session (5h)</b> and <b>Weekly (7d)</b> usage within about a
+            minute, refreshing every minute. It now runs on its own.</p>
+          </div>
+          <figure class="cm-fig"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_normal.png" alt="codeMeter showing Claude session and weekly usage" width="1280" height="960" loading="lazy"></figure>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ================= MORE HELP ================= -->
+    <div class="cm-more">
+
+      <details class="cm-sec">
+        <summary>Reading the screen</summary>
+        <div class="cm-secbody cm-split">
+          <div>
+            <p>The top card is your 5-hour window, the bottom card your weekly window: percentage used, a bar, and when it resets.</p>
+            <p>The bar never changes color. Pace shows in the <b>percentage</b>, the <b>card outline and corner dot</b>,
+            and the <b>thin time line</b> under the bar:</p>
+            <ul>
+              <li>Normal colors: on pace.</li>
+              <li><span class="cm-dot cm-a"></span>Amber: using it faster than the clock.</li>
+              <li><span class="cm-dot cm-r"></span>Red: clearly overspending; likely to run out before it resets.</li>
+            </ul>
+            <p>The small dot at the top right is the connection: <span class="cm-dot cm-g"></span>green OK,
+            <span class="cm-dot cm-a"></span>amber connecting or rate-limited, <span class="cm-dot cm-r"></span>red error.</p>
+          </div>
+          <figure class="cm-fig cm-cx-only"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_alert.png" alt="Codex screen with the 5h card red and weekly card amber" width="1280" height="960" loading="lazy"></figure>
+          <figure class="cm-fig cm-cl-only"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_alert.png" alt="Claude screen with the session card red and weekly card amber" width="1280" height="960" loading="lazy"></figure>
+        </div>
+      </details>
+
+      <details class="cm-sec">
+        <summary>Buttons</summary>
+        <div class="cm-secbody">
+          <dl class="cm-keys">
+            <span class="cm-kh"></span><span class="cm-kh">Tap</span><span class="cm-kh">Hold</span>
+            <dt>A</dt><dd class="cm-tap">Light / dark</dd><dd class="cm-hold">Status screen</dd>
+            <dt>B</dt><dd class="cm-tap">Brightness</dd><dd class="cm-hold">About 7 s: log in again<small>The screen says 5 s; keep holding past RE-ONBOARD. Wi-Fi is kept.</small></dd>
+            <dt>C</dt><dd class="cm-tap">Screen on / off</dd><dd class="cm-hold">About 7 s: factory reset<small>Keep holding past RESET. Use this to switch service.</small></dd>
+          </dl>
+          <p>Let go early to cancel a hold.</p>
+        </div>
+      </details>
+
+      <details class="cm-sec">
+        <summary>Troubleshooting</summary>
+        <div class="cm-secbody">
+          <h3>It won't join my Wi-Fi</h3>
+          <p>codeMeter needs 2.4 GHz Wi-Fi with a WPA2 password (not 5 GHz-only or WPA3-only). Check the password,
+          then hold <b>C</b> about 7 s to start setup over.</p>
+
+          <h3>The setup page didn't open</h3>
+          <p>Stay on the codeMeter-XXXXXX Wi-Fi and go to <code>http://192.168.4.1</code>. If your phone says the
+          network has no internet, stay connected anyway.</p>
+
+          <div class="cm-cx-only">
+            <h3>"Sign-in code expired"</h3>
+            <p>Press <b>B</b> for a new code. B only gets a new code on this screen and on "Can't reach OpenAI".</p>
+
+            <h3>"Can't reach OpenAI"</h3>
+            <p>It retries on its own, or press <b>B</b>. If it keeps happening, an ad blocker or filtering DNS is in the
+            way: allow <code>auth.openai.com</code> and <code>chatgpt.com</code>.</p>
+
+            <h3>"Codex login expired"</h3>
+            <p>Hold <b>B</b> about 7 s. codeMeter shows a new SIGN IN screen; repeat step 3. Your Wi-Fi is kept.</p>
+          </div>
+
+          <div class="cm-cl-only">
+            <h3>"Claude login expired"</h3>
+            <p>Hold <b>B</b> about 7 s. The codeMeter-XXXXXX Wi-Fi comes back: run <code>claude setup-token</code>
+            again and paste the new token. Your Wi-Fi is kept.</p>
+
+            <h3>Bars stay blank</h3>
+            <p>Check that you have a Pro or Max plan, and that an ad blocker isn't blocking <code>api.anthropic.com</code>.</p>
+          </div>
+
+          <h3>The clock shows the wrong time</h3>
+          <p>The time zone comes from <code>ip-api.com</code>. Allow it in your ad blocker, then unplug and replug codeMeter.</p>
+
+          <h3>Switch to the other service</h3>
+          <p>Hold <b>C</b> about 7 s to reset, then set up again and pick the other service.</p>
+
+          <h3>Won't start at all</h3>
+          <p>Updates install themselves. For a USB recovery, use
+          <a href="https://bricekevin.github.io/fw/" target="_blank" rel="noopener">bricekevin.github.io/fw</a> in Chrome or Edge on a computer, or email us.</p>
+        </div>
+      </details>
+
+      <details class="cm-sec">
+        <summary>Privacy</summary>
+        <div class="cm-secbody">
+          <p>Your <span class="cm-cx-only">ChatGPT sign-in</span><span class="cm-cl-only">Claude token</span> is stored only on
+          codeMeter. There's no Encinitas 3D account or server.</p>
+          <p>It connects to <span class="cm-cx-only">OpenAI</span><span class="cm-cl-only">Anthropic</span> for your usage,
+          GitHub for firmware updates, internet time servers, and ip-api.com for your time zone.</p>
+          <p>Lost it? Hold <b>C</b> about 7 s to wipe it, and sign it out from your
+          <span class="cm-cx-only">ChatGPT</span><span class="cm-cl-only">Claude</span> account settings.</p>
+        </div>
+      </details>
     </div>
-  </section>
 
-  <!-- STEPS -->
-  <section class="cm-sec" id="cmsg-steps">
-    <h2 class="cm-h2">Set it up</h2>
-    <p class="cm-sub">Steps 1 to 3 are the same for both services.</p>
-    <div class="cm-pathbar">
-      <span>Showing steps for:</span>
-      <button type="button" class="cm-cx" data-pick="codex">OpenAI Codex</button>
-      <button type="button" class="cm-cl" data-pick="claude">Claude Code</button>
-      <button type="button" class="cm-both" data-pick="both">Both</button>
+    <div class="cm-foot">
+      <p>Questions? Email <a href="mailto:info@encinitas3d.com">info@encinitas3d.com</a>.</p>
+      <p>codeMeter is made by Encinitas 3D and is not affiliated with or endorsed by OpenAI or Anthropic.
+      OpenAI, ChatGPT and Codex are trademarks of OpenAI; Claude is a trademark of Anthropic.</p>
     </div>
-
-    <div class="cm-step cm-first">
-      <div class="cm-num">1</div>
-      <div>
-        <h3>Plug in and join its Wi-Fi</h3>
-        <p>Power codeMeter with a USB-C cable. After a moment it shows <b>STEP 1 of 2</b> with a QR code.</p>
-        <p>Scan that QR with your phone's camera to join the device's Wi-Fi, or join the network
-        <b>codeMeter-XXXXXX</b> by hand in your phone's Wi-Fi settings (the exact name is on the screen).</p>
-      </div>
-      <div class="cm-media">
-        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard1.png" alt="STEP 1 of 2 screen with a Wi-Fi QR code and the codeMeter network name" width="1280" height="960" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="cm-step">
-      <div class="cm-num">2</div>
-      <div>
-        <h3>Open the setup page</h3>
-        <p>Once your phone joins, the screen turns green (<b>STEP 2 of 2</b>) and a setup page usually
-        opens by itself. If it doesn't, scan the new QR or open <code>http://192.168.4.1</code> in your
-        phone's browser.</p>
-        <p>Tap <b>Setup Device</b>.</p>
-        <div class="cm-tip">No page? Some phones hide it while private DNS or a VPN is on. Type
-        <code>http://192.168.4.1</code> into the browser yourself.</div>
-      </div>
-      <div class="cm-media">
-        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard2.png" alt="STEP 2 of 2 screen showing the address 192.168.4.1" width="1280" height="960" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="cm-step">
-      <div class="cm-num">3</div>
-      <div>
-        <h3>Pick your service and your home Wi-Fi</h3>
-        <ol>
-          <li>Choose your home Wi-Fi from the list and enter its password.</li>
-          <li>Under <b>"Which do you use?"</b> tap
-            <span class="cm-only-codex"><b>OpenAI Codex</b></span><span class="cm-only-unpicked"> or </span><span class="cm-only-claude"><b>Claude Code</b></span>.</li>
-        </ol>
-        <p class="cm-only-codex"><span class="cm-tag cm-cx">Codex</span> The token box disappears. Tap <b>Save</b>. That's all for the setup page.</p>
-        <p class="cm-only-claude"><span class="cm-tag cm-cl">Claude</span> Leave the page open. You'll paste a token into the <b>Claude token</b> box next (step 4).</p>
-      </div>
-      <div class="cm-media">
-        <div class="cm-phone cm-only-codex"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_codex.png" alt="Setup page with OpenAI Codex selected and no token box" width="760" height="1216" loading="lazy"></div>
-        <div class="cm-phone cm-only-claude"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_claude.png" alt="Setup page with Claude Code selected and the Claude token box" width="760" height="1519" loading="lazy"></div>
-      </div>
-    </div>
-
-    <!-- CODEX PATH -->
-    <div class="cm-step cm-cxs cm-only-codex" id="cmsg-codex">
-      <div class="cm-num">4</div>
-      <div>
-        <span class="cm-tag cm-cx">Codex</span>
-        <h3>Wait for the blue SIGN IN screen</h3>
-        <p>After you tap Save, codeMeter restarts, joins your Wi-Fi, and shows a blue <b>SIGN IN</b>
-        screen with a QR code and a short code like:</p>
-        <span class="cm-bigcode">KQX4-7HRTM</span>
-        <p>The code is good for <b>15 minutes</b>. A countdown at the bottom shows the time left.</p>
-        <p>Your phone drops off the codeMeter Wi-Fi when the device restarts. Make sure it's back on your
-        normal Wi-Fi or mobile data before step 5.</p>
-      </div>
-      <div class="cm-media">
-        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login.png" alt="Blue Codex SIGN IN screen with a QR code, the address auth.openai.com/codex/device and a sign-in code" width="1280" height="960" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="cm-step cm-cxs cm-only-codex">
-      <div class="cm-num">5</div>
-      <div>
-        <span class="cm-tag cm-cx">Codex</span>
-        <h3>Sign in to ChatGPT on your phone</h3>
-        <ol>
-          <li>Scan the QR on the screen, or open <a href="https://auth.openai.com/codex/device" target="_blank" rel="noopener"><b>auth.openai.com/codex/device</b></a>.</li>
-          <li>Sign in to the ChatGPT account that has Codex.</li>
-          <li>Type the code exactly as shown on codeMeter, then approve.</li>
-        </ol>
-        <div class="cm-tip cm-cx">You sign in on OpenAI's own page. codeMeter never sees your ChatGPT password.</div>
-      </div>
-      <div class="cm-media"></div>
-    </div>
-
-    <div class="cm-step cm-cxs cm-only-codex">
-      <div class="cm-num">6</div>
-      <div>
-        <span class="cm-tag cm-cx">Codex</span>
-        <h3>"You're all set"</h3>
-        <p>Within a few seconds the screen says <b>You're all set</b> and your <b>5h limit</b> and
-        <b>Weekly limit</b> appear. They refresh every 60 seconds.</p>
-        <p>If the code runs out first, the screen says <b>Sign-in code expired</b>. Press <b>B</b> for a
-        new code.</p>
-      </div>
-      <div class="cm-media">
-        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login_done.png" alt="Codex screen reading You're all set, Loading your Codex usage" width="1280" height="960" loading="lazy"></div>
-      </div>
-    </div>
-
-    <!-- CLAUDE PATH -->
-    <div class="cm-step cm-cls cm-only-claude" id="cmsg-claude">
-      <div class="cm-num">4</div>
-      <div>
-        <span class="cm-tag cm-cl">Claude</span>
-        <h3>Get your Claude token (on a computer)</h3>
-        <p>On a computer with the <b>Claude CLI</b> installed, open a terminal (Terminal on Mac, Command
-        Prompt or PowerShell on Windows) and run:</p>
-        <div class="cm-cmd"><code id="cmsg-cmd">claude setup-token</code><button type="button" class="cm-btn" id="cmsg-copy">Copy</button></div>
-        <p>It opens a browser to log in to Claude, then prints a long token starting with
-        <code>sk-ant-oat01-</code>. Copy the whole thing. You only do this once.</p>
-      </div>
-      <div class="cm-media"></div>
-    </div>
-
-    <div class="cm-step cm-cls cm-only-claude">
-      <div class="cm-num">5</div>
-      <div>
-        <span class="cm-tag cm-cl">Claude</span>
-        <h3>Get the token onto the device, then Save</h3>
-        <p>Pick whichever is easier:</p>
-        <ol>
-          <li><b>Paste it.</b> Get the token to your phone (for example, email or message it to yourself),
-          paste it into the <b>Claude token</b> box on the setup page, and tap <b>Save</b>.</li>
-          <li><b>Scan it.</b> Use the <a href="#cmsg-helper">token QR helper</a> below on your computer.
-          It turns the token into a QR code that your phone sends straight to codeMeter.</li>
-        </ol>
-        <p>codeMeter restarts and shows your <b>Session (5h)</b> and <b>Weekly (7d)</b> usage within
-        about a minute. It refreshes every 60 seconds.</p>
-      </div>
-      <div class="cm-media">
-        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_normal.png" alt="Orange Claude usage screen with session and weekly cards" width="1280" height="960" loading="lazy"></div>
-      </div>
-    </div>
-
-    <div class="cm-done">You're done. After setup, codeMeter runs on its own. No phone or computer needs to stay on.</div>
-  </section>
-
-  <!-- TOKEN HELPER -->
-  <section class="cm-sec cm-only-claude" id="cmsg-helper">
-    <h2 class="cm-h2">Claude token QR helper</h2>
-    <p class="cm-sub">For Claude Code only. Codex users don't need this: Codex signs in on the device itself.</p>
-    <div class="cm-helper">
-      <div>
-        <h3>Paste your token, scan the QR</h3>
-        <ol>
-          <li>Run <code>claude setup-token</code> and copy the token it prints.</li>
-          <li>Paste it into the box below. A QR code appears as soon as it looks right.</li>
-          <li>With your phone <b>on the codeMeter-XXXXXX Wi-Fi</b>, scan the QR with the camera and open the link.</li>
-        </ol>
-        <p>Your phone shows <b>All set</b> if the device already has your home Wi-Fi (it restarts and starts
-        showing usage), or <b>Token saved</b> if it doesn't yet. In that case, go back to the setup page,
-        finish your Wi-Fi with <b>Claude Code</b> picked, leave the token box empty, and tap Save.</p>
-        <label for="cmsg-token" style="font-weight:600;font-size:.9rem;color:#F5F0E8;">Claude token</label>
-        <textarea id="cmsg-token" placeholder="sk-ant-oat01-..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
-        <div class="cm-warn" id="cmsg-warn" role="status"></div>
-        <div class="cm-lock"><b>Private</b><span>Your token never leaves this page. The QR code is made right
-        here in your browser. Nothing is uploaded or saved.</span></div>
-      </div>
-      <div>
-        <div class="cm-qr cm-empty" id="cmsg-qr">The QR code appears here once you paste a token.</div>
-        <div class="cm-qrcap" id="cmsg-qrcap"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- READING THE SCREEN -->
-  <section class="cm-sec" id="cmsg-read">
-    <h2 class="cm-h2">Reading the screen</h2>
-    <p class="cm-sub">Two cards: your 5-hour window on top and your weekly window below. Each shows the
-    percentage used, a bar, and when that window resets.</p>
-    <div class="cm-read">
-      <figure class="cm-only-codex"><div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_alert.png" alt="Codex usage with the 5h limit in red and the weekly limit in amber" width="1280" height="960" loading="lazy"></div>
-        <figcaption class="cm-cap">Codex: blue <code>&gt;_ codex</code> theme</figcaption></figure>
-      <figure class="cm-only-claude"><div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_alert.png" alt="Claude usage with the session card in red and the weekly card in amber" width="1280" height="960" loading="lazy"></div>
-        <figcaption class="cm-cap">Claude: orange codeMeter theme</figcaption></figure>
-    </div>
-    <div class="cm-legend">
-      <div class="cm-card">
-        <h4>Pace: am I using it too fast?</h4>
-        <p>The bar itself <b>never changes color</b>. Pace shows in the <b>percentage number</b>, the
-        <b>card outline and corner dot</b>, and the <b>thin time line</b> under the bar (how much of the
-        window has passed).</p>
-        <ul>
-          <li><span class="cm-dot cm-n"></span><span><b>Normal colors:</b> on pace.</span></li>
-          <li><span class="cm-dot cm-a"></span><span><b>Amber:</b> you're using this limit faster than the clock.</span></li>
-          <li><span class="cm-dot cm-r"></span><span><b>Red:</b> clearly overspending, likely to hit the limit before it resets.</span></li>
-        </ul>
-      </div>
-      <div class="cm-card">
-        <h4>Status dot (top right)</h4>
-        <ul>
-          <li><span class="cm-dot cm-g"></span><span><b>Green:</b> connected, numbers are current.</span></li>
-          <li><span class="cm-dot cm-a"></span><span><b>Amber:</b> still connecting, or briefly rate-limited. It sorts itself out.</span></li>
-          <li><span class="cm-dot cm-r"></span><span><b>Red:</b> an error. See troubleshooting below.</span></li>
-        </ul>
-        <p style="margin-top:8px">Codex screens are <b>blue</b> with a <code>&gt;_ codex</code> wordmark. Claude
-        screens are <b>orange</b>. Hold <b>A</b> to see the Status screen, which names the service
-        (for example "Codex (plus)").</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUTTONS -->
-  <section class="cm-sec" id="cmsg-buttons">
-    <h2 class="cm-h2">The three buttons</h2>
-    <p class="cm-sub">Left to right under the screen: A, B, C.</p>
-    <div class="cm-keys">
-      <div class="cm-key">
-        <div class="cm-kl"><span class="cm-kb">A</span><span class="cm-kp">left</span></div>
-        <dl><dt>Tap</dt><dd>Light / dark</dd>
-        <dt>Hold</dt><dd>Status screen<small>Firmware, Wi-Fi, service, updates. Let go to return.</small></dd></dl>
-      </div>
-      <div class="cm-key">
-        <div class="cm-kl"><span class="cm-kb">B</span><span class="cm-kp">middle</span></div>
-        <dl><dt>Tap</dt><dd>Brightness</dd>
-        <dt>Hold about 7 s</dt><dd>Log in again<small>The screen says 5 s: keep holding past the orange RE-ONBOARD screen. Your Wi-Fi is kept.</small></dd></dl>
-      </div>
-      <div class="cm-key">
-        <div class="cm-kl"><span class="cm-kb">C</span><span class="cm-kp">right</span></div>
-        <dl><dt>Tap</dt><dd>Screen on / off</dd>
-        <dt>Hold about 7 s</dt><dd>Factory reset / switch service<small>Keep holding past the red RESET screen. Wipes Wi-Fi and login, then starts setup again.</small></dd></dl>
-      </div>
-    </div>
-    <div class="cm-tip">Let go early on the RE-ONBOARD or RESET screen to cancel. To switch between Codex and Claude,
-    hold C to reset, then pick the other service in step 3.</div>
-  </section>
-
-  <!-- TROUBLESHOOTING -->
-  <section class="cm-sec" id="cmsg-help">
-    <h2 class="cm-h2">Troubleshooting</h2>
-    <p class="cm-sub">Tap a question to open it.</p>
-
-    <details class="cm-faq">
-      <summary>It won't join my Wi-Fi ("WiFi connect failed")</summary>
-      <div class="cm-ans">
-        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/wifi_error.png" alt="WIFI ERROR screen: WiFi connect failed, hold button C 5s to reconfigure" width="1280" height="960" loading="lazy"></div>
-        <p>codeMeter needs <b>2.4 GHz Wi-Fi with a WPA2 password</b>. It can't join 5 GHz-only or WPA3-only
-        networks. Most routers also broadcast a 2.4 GHz network, sometimes under a separate name.</p>
-        <p>Check the password, then hold <b>C</b> about 7 seconds to start setup over.</p>
-        <div class="cm-clear"></div>
-      </div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>The setup page didn't open on my phone</summary>
-      <div class="cm-ans"><p>Stay joined to <b>codeMeter-XXXXXX</b> and open <code>http://192.168.4.1</code>
-      in your browser. If your phone warns that the network has no internet, choose to stay connected.
-      Turning off a VPN or private DNS for a minute can help.</p></div>
-    </details>
-
-    <details class="cm-faq cm-only-codex">
-      <summary><span><span class="cm-tag cm-cx">Codex</span> "Sign-in code expired"</span></summary>
-      <div class="cm-ans">
-        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login_expired.png" alt="Codex SIGN IN screen: Sign-in code expired, press B for a new code" width="1280" height="960" loading="lazy"></div>
-        <p>Codes last 15 minutes. Press <b>B</b> for a new code, then repeat step 5.</p>
-        <p>B only gets a new code from this screen or the "Can't reach OpenAI" screen. While a code is still
-        on screen, just use it.</p>
-        <div class="cm-clear"></div>
-      </div>
-    </details>
-
-    <details class="cm-faq cm-only-codex">
-      <summary><span><span class="cm-tag cm-cx">Codex</span> "Can't reach OpenAI"</span></summary>
-      <div class="cm-ans">
-        <p>The device is on your Wi-Fi but can't reach OpenAI's sign-in servers. It retries on its own;
-        press <b>B</b> to retry now.</p>
-        <p>If it keeps happening, an ad blocker or filtering DNS (Pi-hole, AdGuard, NextDNS, a parental-control
-        router) is likely blocking it. Allow <code>auth.openai.com</code> and <code>chatgpt.com</code>.</p>
-      </div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>"Codex login expired" or "Claude login expired"</summary>
-      <div class="cm-ans">
-        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_reauth.png" alt="ACTION NEEDED screen: Codex login expired, hold button B 5s to log in again" width="1280" height="960" loading="lazy"></div>
-        <p>The saved login stopped working, so usage updates have paused. Hold <b>B</b> about 7 seconds
-        (keep holding past RE-ONBOARD). Your Wi-Fi is kept.</p>
-        <ul>
-          <li><b>Codex:</b> the device goes straight to a new SIGN IN screen. Repeat steps 4 to 6. It normally
-          renews its own login, so this should be rare.</li>
-          <li><b>Claude:</b> the setup Wi-Fi comes back. Rejoin <b>codeMeter-XXXXXX</b>, run
-          <code>claude setup-token</code> again, and paste or scan the new token.</li>
-        </ul>
-        <div class="cm-clear"></div>
-      </div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>The clock shows the wrong time</summary>
-      <div class="cm-ans"><p>codeMeter sets its time zone automatically from your internet connection using
-      <code>ip-api.com</code>. If you use an ad blocker or filtering DNS, allow <code>ip-api.com</code>,
-      then unplug codeMeter and plug it back in.</p></div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>The bars are blank or the status dot stays red</summary>
-      <div class="cm-ans">
-        <ul>
-          <li>Hold <b>A</b> and check the Status screen: is Wi-Fi connected, and is the right service listed?</li>
-          <li>Confirm your plan is supported (see <a href="#cmsg-need">What you need</a>). Codex on a Business or
-          Enterprise workspace is not verified yet and may leave the bars blank.</li>
-          <li>Filtering DNS or ad blockers can block the service. Codex needs <code>chatgpt.com</code>;
-          Claude needs <code>api.anthropic.com</code>.</li>
-        </ul>
-      </div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>How do I switch from Codex to Claude, or back?</summary>
-      <div class="cm-ans"><p>Hold <b>C</b> about 7 seconds (keep holding past RESET). codeMeter wipes its settings
-      and starts setup again. Follow steps 1 to 3 and pick the other service.</p></div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>Does it update itself? Something went badly wrong</summary>
-      <div class="cm-ans"><p>Yes. It checks for firmware updates every 6 hours and installs them over Wi-Fi.
-      If the device won't start at all, a USB recovery flasher is at
-      <a href="https://bricekevin.github.io/fw/" target="_blank" rel="noopener">bricekevin.github.io/fw</a>
-      (use Chrome or Edge on a computer). Or email us and we'll help.</p></div>
-    </details>
-
-    <details class="cm-faq">
-      <summary>I lost the device or I'm giving it away</summary>
-      <div class="cm-ans">
-        <p>Hold <b>C</b> about 7 seconds to wipe it. If it's out of your hands, cut off its access from your account:</p>
-        <ul>
-          <li><b>Codex:</b> in your ChatGPT account's security settings (for example, log out of all devices).</li>
-          <li><b>Claude:</b> in your Claude account settings, revoke the token.</li>
-        </ul>
-      </div>
-    </details>
-  </section>
-
-  <!-- PRIVACY -->
-  <section class="cm-sec" id="cmsg-privacy">
-    <h2 class="cm-h2">Privacy</h2>
-    <div class="cm-privacy">
-      <div class="cm-card">
-        <h4>Your login stays on the device</h4>
-        <p>Your ChatGPT sign-in or Claude token is stored only on codeMeter. There's no Encinitas 3D
-        server and no account with us. The token helper on this page runs entirely in your browser.</p>
-      </div>
-      <div class="cm-card">
-        <h4>What it connects to</h4>
-        <p><b>OpenAI</b> (Codex) or <b>Anthropic</b> (Claude) for your usage, <b>GitHub</b> for firmware
-        updates, <b>internet time servers</b>, and <b>ip-api.com</b> for your time zone. Nothing else.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer class="cm-foot">
-    <p>Stuck? Email <a href="mailto:info@encinitas3d.com"><b>info@encinitas3d.com</b></a>. We're happy to help.</p>
-    <p>codeMeter is independent hardware by Encinitas 3D. It is not affiliated with or endorsed by OpenAI or
-    Anthropic. OpenAI, ChatGPT and Codex are trademarks of OpenAI; Claude is a trademark of Anthropic.</p>
-  </footer>
-
-</div>
+  </div>
 </div>
 
 <script>
@@ -2923,37 +2670,29 @@ window.cmsgQRCode = qrcode;
 })();
 </script>
 <script>
-// codeMeter setup guide: service picker + Claude token QR helper.
-// Everything runs in the browser; the token is never sent anywhere.
+// codeMeter setup guide: #codex / #claude deep links + Claude token QR helper.
+// The service switch itself is pure CSS (radio inputs); this only keeps the
+// URL hash in step. Everything runs in the browser; the token is never sent.
 (function () {
   var root = document.getElementById("cmsg");
   if (!root) return;
+  var rCodex = document.getElementById("cmsg-r-codex");
+  var rClaude = document.getElementById("cmsg-r-claude");
 
-  // --- service picker -------------------------------------------------
-  // Picking a service hides the other path's steps. #codex / #claude in the
-  // URL preselects one, so support replies can link straight to a path.
-  function setSvc(svc, scroll) {
-    if (svc === "codex" || svc === "claude" || svc === "both") root.setAttribute("data-svc", svc);
-    else root.removeAttribute("data-svc");
-    if (history.replaceState) {
-      history.replaceState(null, "", (svc === "codex" || svc === "claude") ? "#" + svc : location.pathname + location.search);
-    }
-    if (scroll) {
-      var s = document.getElementById("cmsg-steps");
-      if (s && s.scrollIntoView) s.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+  function fromHash() {
+    var h = (location.hash || "").replace("#", "").toLowerCase();
+    if (h === "claude") rClaude.checked = true;
+    else if (h === "codex" || h === "") rCodex.checked = true;
   }
-  var picks = root.querySelectorAll("[data-pick]");
-  for (var i = 0; i < picks.length; i++) {
-    picks[i].addEventListener("click", function (e) {
-      var inFork = !!(e.currentTarget.className.indexOf("cm-pick") !== -1);
-      setSvc(e.currentTarget.getAttribute("data-pick"), inFork);
-    });
+  function toHash() {
+    var svc = rClaude.checked ? "claude" : "codex";
+    if (history.replaceState) history.replaceState(null, "", "#" + svc);
   }
-  var h = (location.hash || "").replace("#", "");
-  if (h === "codex" || h === "claude") setSvc(h, false);
+  rCodex.addEventListener("change", toHash);
+  rClaude.addEventListener("change", toHash);
+  window.addEventListener("hashchange", fromHash);
+  fromHash();
 
-  // --- copy button ----------------------------------------------------
   var copyBtn = document.getElementById("cmsg-copy");
   if (copyBtn) copyBtn.addEventListener("click", function () {
     var text = document.getElementById("cmsg-cmd").textContent;
@@ -2967,8 +2706,6 @@ window.cmsgQRCode = qrcode;
   });
 
   // --- token QR helper (same logic as pairing/index.html) -------------
-  // The QR encodes a URL on the device's fixed setup-Wi-Fi address; a phone
-  // on that Wi-Fi opens it and hands the token to the device.
   var DEVICE_URL = "http://192.168.4.1/cred";
   var tokenEl = document.getElementById("cmsg-token");
   var qrEl    = document.getElementById("cmsg-qr");
@@ -2987,7 +2724,6 @@ window.cmsgQRCode = qrcode;
   //   sk-ant-...            Claude token, as-is
   //   rt.1....              Codex refresh token, as-is
   //   {"tokens":{...}}      Codex auth.json -> its refresh_token
-  // Returns {token, kind} with kind "claude" | "codex" | "" (unrecognised).
   function extractCredential(raw) {
     var t = raw.trim();
     if (t.charAt(0) === "{") {
@@ -3009,27 +2745,21 @@ window.cmsgQRCode = qrcode;
   function render() {
     var raw = tokenEl.value.trim();
     warnEl.textContent = "";
-    if (!raw) {
-      showEmpty("The QR code appears here once you paste a token.");
-      return;
-    }
+    if (!raw) { showEmpty("QR appears here"); return; }
     var cred = extractCredential(raw);
     if (!cred.kind) {
-      warnEl.textContent =
-        "That doesn't look like a Claude token (it should start with “sk-ant-”). " +
-        "Double-check what you pasted.";
+      warnEl.textContent = "That doesn't look like a Claude token (it should start with “sk-ant-”).";
     }
     var url = DEVICE_URL + "?t=" + encodeURIComponent(cred.token);
     try {
-      var qr = makeQR(0, "L");      // 0 = auto-size, L = roomy / easy to scan
+      var qr = makeQR(0, "L");
       qr.addData(url);
       qr.make();
       qrEl.className = "cm-qr";
       qrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 2 });
-      capEl.textContent = (cred.kind === "codex" ? "Codex refresh token. " : "") +
-                          "Scan with a phone on the codeMeter Wi-Fi. Opens " + DEVICE_URL;
+      capEl.textContent = "Scan with a phone on the codeMeter Wi-Fi.";
     } catch (e) {
-      showEmpty("That token is too long to fit in a QR code. Re-run the command and try again.");
+      showEmpty("Too long for a QR. Re-run the command.");
     }
   }
   tokenEl.addEventListener("input", render);
