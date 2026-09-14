@@ -24,19 +24,29 @@
 .cmsg button{font:inherit;text-transform:none;letter-spacing:normal;box-shadow:none;text-shadow:none;min-height:0;width:auto;line-height:1.2;}
 
 /* --- service switch (radio inputs, so it works without JavaScript) ---- */
-.cmsg .cm-radio{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none;}
+.cmsg input.cm-radio[type="radio"],.cmsg input.cm-radio[type="radio"]:checked,.cmsg input.cm-radio[type="radio"]:focus{
+  position:absolute !important;width:1px !important;height:1px !important;min-width:0 !important;min-height:0 !important;
+  margin:-1px !important;padding:0 !important;border:0 !important;opacity:0 !important;clip:rect(0 0 0 0) !important;
+  clip-path:inset(50%) !important;overflow:hidden !important;white-space:nowrap !important;box-shadow:none !important;
+  background:none !important;-webkit-appearance:none !important;-moz-appearance:none !important;appearance:none !important;pointer-events:none !important;}
+.cmsg{position:relative;}
 .cmsg .cm-intro{color:var(--cm-dim);font-size:1.05rem;margin-bottom:18px;}
 .cmsg .cm-switch{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border:1px solid var(--cm-line);border-radius:999px;background:var(--cm-soft);margin-bottom:34px;max-width:100%;}
 .cmsg .cm-switch label{display:block;cursor:pointer;margin:0;padding:9px 20px;border-radius:999px;font-weight:600;font-size:.98rem;color:var(--cm-dim);line-height:1.2;user-select:none;}
 .cmsg .cm-switch label:hover{color:var(--cm-text);}
 .cmsg #cmsg-r-codex:checked ~ .cm-switch label[for="cmsg-r-codex"]{background:#fff;color:var(--cm-cx);box-shadow:0 1px 3px rgba(0,0,0,.12);}
 .cmsg #cmsg-r-claude:checked ~ .cm-switch label[for="cmsg-r-claude"]{background:#fff;color:var(--cm-cl);box-shadow:0 1px 3px rgba(0,0,0,.12);}
-.cmsg .cm-radio:focus-visible ~ .cm-switch{outline:2px solid var(--cm-text);outline-offset:2px;}
+.cmsg .cm-radio:focus-visible ~ .cm-switch,.cmsg[data-focus] .cm-switch{outline:2px solid var(--cm-text);outline-offset:2px;}
 
-/* show only the selected service */
-.cmsg #cmsg-r-codex:checked ~ .cm-body .cm-cl-only{display:none !important;}
-.cmsg #cmsg-r-claude:checked ~ .cm-body .cm-cx-only{display:none !important;}
-.cmsg #cmsg-r-claude:checked ~ .cm-body{--cm-acc:var(--cm-cl);--cm-acc-wash:var(--cm-cl-wash);}
+/* show only the selected service. The :checked rules work without JS; the
+   [data-svc] rules (set by the script) keep it working even if WordPress
+   wraps the radio inputs in a <p> and breaks the sibling selectors. */
+.cmsg #cmsg-r-codex:checked ~ .cm-body .cm-cl-only,.cmsg[data-svc="codex"] .cm-body .cm-cl-only{display:none !important;}
+.cmsg #cmsg-r-claude:checked ~ .cm-body .cm-cx-only,.cmsg[data-svc="claude"] .cm-body .cm-cx-only{display:none !important;}
+.cmsg #cmsg-r-claude:checked ~ .cm-body,.cmsg[data-svc="claude"] .cm-body{--cm-acc:var(--cm-cl);--cm-acc-wash:var(--cm-cl-wash);}
+.cmsg[data-svc="codex"] .cm-switch label[for="cmsg-r-codex"]{background:#fff;color:var(--cm-cx);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.cmsg[data-svc="claude"] .cm-switch label[for="cmsg-r-claude"]{background:#fff;color:var(--cm-cl);box-shadow:0 1px 3px rgba(0,0,0,.12);}
+.cmsg[data-svc="codex"] .cm-switch label[for="cmsg-r-claude"],.cmsg[data-svc="claude"] .cm-switch label[for="cmsg-r-codex"]{background:transparent;color:var(--cm-dim);box-shadow:none;}
 
 /* --- guide ------------------------------------------------------------ */
 .cmsg .cm-need{color:var(--cm-dim);margin:0 0 8px;}
@@ -138,15 +148,8 @@
 </style>
 
 <div class="cmsg" id="cmsg">
-  <input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-codex" value="codex" checked>
-  <input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-claude" value="claude">
-
   <p class="cm-intro">Pick the service you use, then follow the steps. It takes about five minutes.</p>
-
-  <div class="cm-switch" role="radiogroup" aria-label="Service">
-    <label for="cmsg-r-codex">OpenAI Codex</label>
-    <label for="cmsg-r-claude">Claude Code</label>
-  </div>
+  <input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-codex" value="codex" checked><input class="cm-radio" type="radio" name="cmsg-svc" id="cmsg-r-claude" value="claude"><div class="cm-switch" role="radiogroup" aria-label="Service"><label for="cmsg-r-codex">OpenAI Codex</label><label for="cmsg-r-claude">Claude Code</label></div>
 
   <div class="cm-body">
 
@@ -2679,15 +2682,26 @@ window.cmsgQRCode = qrcode;
   var rCodex = document.getElementById("cmsg-r-codex");
   var rClaude = document.getElementById("cmsg-r-claude");
 
+  if (!rCodex || !rClaude) return;
+
+  // Mirror the choice onto the wrapper so the [data-svc] CSS applies too.
+  function sync() { root.setAttribute("data-svc", rClaude.checked ? "claude" : "codex"); }
   function fromHash() {
     var h = (location.hash || "").replace("#", "").toLowerCase();
     if (h === "claude") rClaude.checked = true;
     else if (h === "codex" || h === "") rCodex.checked = true;
+    sync();
   }
   function toHash() {
     var svc = rClaude.checked ? "claude" : "codex";
+    sync();
     if (history.replaceState) history.replaceState(null, "", "#" + svc);
   }
+  // Keyboard focus ring on the switch, also when sibling selectors can't reach it.
+  function onFocus() { root.setAttribute("data-focus", ""); }
+  function onBlur() { root.removeAttribute("data-focus"); }
+  rCodex.addEventListener("focus", onFocus); rClaude.addEventListener("focus", onFocus);
+  rCodex.addEventListener("blur", onBlur);   rClaude.addEventListener("blur", onBlur);
   rCodex.addEventListener("change", toHash);
   rClaude.addEventListener("change", toHash);
   window.addEventListener("hashchange", fromHash);
