@@ -1,0 +1,3038 @@
+<!-- codeMeter setup guide: paste this whole file into a WordPress Custom HTML block.
+     Generated from marketing/setup/index.html by build_wordpress.py; edit index.html, not this file.
+     Images load from https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/
+     Required files there: codex_login.png, codex_login_done.png, codex_login_expired.png, codex_reauth.png, codex_usage_alert.png, codex_usage_normal.png, onboard1.png, onboard2.png, portal_setup_claude.png, portal_setup_codex.png, usage_alert.png, usage_normal.png, wifi_error.png -->
+<style>
+.cmsg{
+  --cm-bg:#FFFFFF; --cm-panel:#FAF7F3; --cm-panel2:#F2EDE6; --cm-line:#E7E0D6;
+  --cm-text:#1C1A17; --cm-dim:#5E5850; --cm-faint:#8C857B;
+  --cm-orange:#DA7756; --cm-orange-t:#B4552F; --cm-orange-wash:#FDF3EE;
+  --cm-blue:#58A6FF; --cm-blue-t:#1D63C4; --cm-blue-wash:#EEF5FF;
+  --cm-green:#2E9B57; --cm-amber:#C98A12; --cm-red:#C8483F;
+  background:var(--cm-bg);color:var(--cm-text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;text-align:left;
+}
+.cmsg *{box-sizing:border-box;}
+.cmsg h1,.cmsg h2,.cmsg h3,.cmsg h4,.cmsg p,.cmsg ul,.cmsg ol,.cmsg figure,.cmsg table{margin:0;padding:0;}
+.cmsg h1,.cmsg h2,.cmsg h3,.cmsg h4{color:var(--cm-text);font-family:inherit;text-transform:none;letter-spacing:-.01em;line-height:1.25;}
+.cmsg img{max-width:100%;height:auto;display:block;border:0;box-shadow:none;}
+.cmsg a{color:var(--cm-orange-t);text-decoration:underline;text-underline-offset:2px;}
+.cmsg code{background:var(--cm-panel2);border:1px solid var(--cm-line);border-radius:5px;padding:1px 6px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:var(--cm-text);word-break:break-word;}
+.cmsg b{font-weight:700;}
+.cmsg p,.cmsg li,.cmsg dd,.cmsg td,.cmsg th{line-height:1.55;}
+.cmsg button{text-transform:none;letter-spacing:normal;line-height:inherit;box-shadow:none;min-height:0;width:auto;text-shadow:none;}
+.cmsg .cm-wrap{max-width:860px;margin:0 auto;padding:40px 20px 80px;}
+
+/* header */
+.cmsg .cm-top{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;}
+.cmsg .cm-brand{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;color:var(--cm-orange);}
+.cmsg .cm-subtitle{color:var(--cm-dim);font-size:1.05rem;}
+.cmsg .cm-lede{color:var(--cm-dim);margin:12px 0 28px;font-size:1.06rem;max-width:640px;}
+
+/* section headings */
+.cmsg .cm-sec{margin-top:52px;scroll-margin-top:24px;}
+.cmsg .cm-h2{font-size:1.45rem;font-weight:750;margin-bottom:6px;}
+.cmsg .cm-sub{color:var(--cm-dim);margin-bottom:20px;}
+
+/* service fork */
+.cmsg .cm-fork{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.cmsg .cm-pick{display:flex;flex-direction:column;gap:10px;text-align:left;cursor:pointer;font:inherit;color:inherit;
+  background:var(--cm-panel);border:2px solid var(--cm-line);border-radius:16px;padding:18px 18px 16px;
+  transition:border-color .12s ease,transform .12s ease,background .12s ease;}
+.cmsg .cm-pick:hover{transform:translateY(-2px);}
+.cmsg .cm-pick:focus-visible{outline:3px solid var(--cm-text);outline-offset:2px;}
+.cmsg .cm-pick.cm-cx:hover,.cmsg[data-svc="codex"] .cm-pick.cm-cx{border-color:var(--cm-blue);background:var(--cm-blue-wash);}
+.cmsg .cm-pick.cm-cl:hover,.cmsg[data-svc="claude"] .cm-pick.cm-cl{border-color:var(--cm-orange);background:var(--cm-orange-wash);}
+.cmsg .cm-pick .cm-shot{background:#000;border-radius:10px;padding:6px;}
+.cmsg .cm-pick .cm-shot img{border-radius:5px;}
+.cmsg .cm-pick .cm-q{font-size:1.18rem;font-weight:750;}
+.cmsg .cm-pick.cm-cx .cm-q{color:var(--cm-blue-t);}
+.cmsg .cm-pick.cm-cl .cm-q{color:var(--cm-orange-t);}
+.cmsg .cm-pick .cm-d{color:var(--cm-dim);font-size:.93rem;}
+.cmsg .cm-pick .cm-go{font-weight:700;font-size:.92rem;}
+.cmsg .cm-pick.cm-cx .cm-go{color:var(--cm-blue-t);}
+.cmsg .cm-pick.cm-cl .cm-go{color:var(--cm-orange-t);}
+
+/* tables */
+.cmsg .cm-tablewrap{overflow-x:auto;border:1px solid var(--cm-line);border-radius:12px;}
+.cmsg table.cm-t{width:100%;border-collapse:collapse;font-size:.94rem;background:var(--cm-bg);border:0;}
+.cmsg table.cm-t th,.cmsg table.cm-t td{padding:11px 14px;border:0;border-top:1px solid var(--cm-line);vertical-align:top;text-align:left;}
+.cmsg table.cm-t thead th{border-top:0;background:var(--cm-panel);font-weight:700;}
+.cmsg table.cm-t tbody th{font-weight:600;color:var(--cm-dim);white-space:nowrap;}
+.cmsg table.cm-t .cm-cxh{color:var(--cm-blue-t);}
+.cmsg table.cm-t .cm-clh{color:var(--cm-orange-t);}
+
+/* steps */
+.cmsg .cm-pathbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--cm-panel);
+  border:1px solid var(--cm-line);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-size:.93rem;color:var(--cm-dim);}
+.cmsg .cm-pathbar button{font:inherit;font-weight:600;cursor:pointer;border-radius:20px;padding:4px 14px;
+  border:1.5px solid var(--cm-line);background:var(--cm-bg);color:var(--cm-dim);}
+.cmsg[data-svc="codex"] .cm-pathbar button.cm-cx{border-color:var(--cm-blue);color:var(--cm-blue-t);background:var(--cm-blue-wash);}
+.cmsg[data-svc="claude"] .cm-pathbar button.cm-cl{border-color:var(--cm-orange);color:var(--cm-orange-t);background:var(--cm-orange-wash);}
+.cmsg[data-svc="both"] .cm-pathbar button.cm-both{border-color:var(--cm-text);color:var(--cm-text);background:var(--cm-panel2);}
+.cmsg .cm-step{display:grid;grid-template-columns:40px minmax(0,1fr) 260px;gap:8px 18px;padding:22px 0;border-top:1px solid var(--cm-line);align-items:start;}
+.cmsg .cm-step > div{min-width:0;}
+.cmsg .cm-step.cm-first{border-top:0;}
+.cmsg .cm-num{width:34px;height:34px;border-radius:50%;background:var(--cm-text);color:#fff;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.cmsg .cm-step.cm-cxs .cm-num{background:var(--cm-blue-t);}
+.cmsg .cm-step.cm-cls .cm-num{background:var(--cm-orange-t);}
+.cmsg .cm-step h3{font-size:1.15rem;font-weight:700;margin:4px 0 6px;}
+.cmsg .cm-step p{color:var(--cm-dim);margin-bottom:8px;}
+.cmsg .cm-step p:last-child{margin-bottom:0;}
+.cmsg .cm-step ol{color:var(--cm-dim);padding-left:22px;margin:6px 0 8px;}
+.cmsg .cm-step ol li{margin:5px 0;}
+.cmsg .cm-tag{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  border-radius:20px;padding:2px 9px;margin-bottom:2px;vertical-align:middle;}
+.cmsg .cm-tag.cm-cx{background:var(--cm-blue-wash);color:var(--cm-blue-t);}
+.cmsg .cm-tag.cm-cl{background:var(--cm-orange-wash);color:var(--cm-orange-t);}
+.cmsg .cm-media{display:flex;flex-direction:column;gap:10px;}
+.cmsg .cm-screen{background:#000;border-radius:12px;padding:7px;box-shadow:0 8px 20px rgba(40,30,20,.10);}
+.cmsg .cm-screen img{border-radius:6px;}
+.cmsg .cm-cap{font-size:.8rem;color:var(--cm-faint);text-align:center;margin-top:6px;}
+.cmsg .cm-phone{background:#1A1815;border-radius:18px;padding:8px;max-width:230px;margin:0 auto;box-shadow:0 8px 20px rgba(40,30,20,.12);}
+.cmsg .cm-phone img{border-radius:11px;}
+.cmsg .cm-tip{background:var(--cm-panel);border-left:3px solid var(--cm-text);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:.92rem;color:var(--cm-dim);}
+.cmsg .cm-tip.cm-cx{border-left-color:var(--cm-blue);}
+.cmsg .cm-tip.cm-cl{border-left-color:var(--cm-orange);}
+.cmsg .cm-bigcode{display:inline-block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;
+  font-size:1.02rem;background:var(--cm-blue-wash);color:var(--cm-blue-t);border:1px solid #C9DDF7;border-radius:8px;padding:5px 12px;margin:2px 0 8px;}
+.cmsg .cm-done{display:flex;align-items:center;gap:12px;background:#EEF8F1;border:1px solid #CFE9D8;color:#1F6B3C;
+  border-radius:12px;padding:12px 16px;margin-top:22px;font-weight:600;}
+
+/* Hide the other service's steps once a service is picked. With no pick (or
+   no JavaScript) both paths stay visible, each clearly tagged. */
+.cmsg[data-svc="codex"] .cm-only-claude{display:none !important;}
+.cmsg[data-svc="claude"] .cm-only-codex{display:none !important;}
+.cmsg[data-svc="codex"] .cm-only-unpicked,.cmsg[data-svc="claude"] .cm-only-unpicked{display:none !important;}
+/* Step 3 phone mock: one at a time. Codex until a service is picked; both
+   only when "Both" is chosen. */
+.cmsg:not([data-svc]) .cm-phone.cm-only-claude{display:none !important;}
+
+/* overflow hardening: grid tracks and buttons must be allowed to shrink */
+.cmsg .cm-wrap,.cmsg .cm-fork > *,.cmsg .cm-read > *,.cmsg .cm-legend > *,.cmsg .cm-keys > *,.cmsg .cm-privacy > *{min-width:0;}
+.cmsg .cm-pick{width:100%;min-width:0;max-width:100%;white-space:normal;}
+.cmsg .cm-pick > span{display:block;max-width:100%;}
+.cmsg .cm-screen,.cmsg .cm-phone,.cmsg .cm-shot{max-width:100%;}
+.cmsg img{max-width:100% !important;height:auto !important;}
+.cmsg .cm-pathbar > *{flex:0 1 auto;}
+
+/* command + token helper */
+.cmsg .cm-cmd{display:flex;align-items:center;gap:8px;background:#1A1815;border-radius:9px;padding:5px 5px 5px 14px;margin:8px 0;max-width:420px;}
+.cmsg .cm-cmd code{flex:1;min-width:0;background:none;border:0;padding:0;color:#F0A07F;font-size:1rem;white-space:nowrap;overflow-x:auto;}
+.cmsg .cm-btn{font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;border:0;border-radius:7px;background:var(--cm-orange);color:#1A1815;padding:8px 14px;line-height:1.2;}
+.cmsg .cm-btn:hover{background:#C9663F;}
+.cmsg .cm-helper{background:#1A1815;color:#F5F0E8;border-radius:18px;padding:24px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start;}
+.cmsg .cm-helper > div{min-width:0;}
+.cmsg .cm-helper h3{color:#F5F0E8;font-size:1.2rem;margin-bottom:6px;}
+.cmsg .cm-helper p{color:#BDB7AD;font-size:.94rem;margin-bottom:8px;}
+.cmsg .cm-helper ol{color:#BDB7AD;font-size:.94rem;padding-left:20px;margin:8px 0;}
+.cmsg .cm-helper ol li{margin:5px 0;}
+.cmsg .cm-helper b{color:#F5F0E8;}
+.cmsg .cm-helper code{background:#2A2723;border-color:#3A352C;color:#F0A07F;}
+.cmsg .cm-helper textarea{width:100%;min-height:92px;resize:vertical;margin:8px 0 0;background:#232019;border:1px solid #3A352C;
+  border-radius:9px;color:#F5F0E8;padding:11px 13px;font-size:.9rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:none;}
+.cmsg .cm-helper textarea:focus{outline:2px solid var(--cm-orange);outline-offset:0;}
+.cmsg .cm-warn{color:#E8A87C;font-size:.86rem;min-height:1.2em;margin-top:6px;}
+.cmsg .cm-qr{background:#fff;border-radius:14px;padding:14px;width:100%;max-width:280px;margin:0 auto;}
+.cmsg .cm-qr svg{width:100%;height:auto;display:block;}
+.cmsg .cm-qr.cm-empty{display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;background:#232019;
+  border:1px dashed #3A352C;color:#9B9590;font-size:.9rem;text-align:center;padding:24px;}
+.cmsg .cm-qrcap{color:#9B9590;font-size:.84rem;text-align:center;margin-top:10px;word-break:break-word;}
+.cmsg .cm-lock{display:flex;gap:10px;background:#232019;border:1px solid #36322A;border-radius:10px;padding:10px 13px;margin-top:12px;font-size:.86rem;color:#BDB7AD;}
+.cmsg .cm-lock b{color:#7FCB8F;flex:none;}
+
+/* reading the screen */
+.cmsg .cm-read{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.cmsg .cm-legend{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cmsg .cm-card{background:var(--cm-panel);border:1px solid var(--cm-line);border-radius:14px;padding:14px 16px;}
+.cmsg .cm-card h4{font-size:1rem;font-weight:700;margin-bottom:6px;}
+.cmsg .cm-card p,.cmsg .cm-card li{color:var(--cm-dim);font-size:.92rem;}
+.cmsg .cm-card ul{list-style:none;padding:0;margin:0;}
+.cmsg .cm-card li{display:flex;gap:9px;align-items:baseline;margin:5px 0;}
+.cmsg .cm-dot{flex:none;width:10px;height:10px;border-radius:50%;display:inline-block;position:relative;top:1px;}
+.cmsg .cm-dot.cm-g{background:var(--cm-green);} .cmsg .cm-dot.cm-a{background:var(--cm-amber);} .cmsg .cm-dot.cm-r{background:var(--cm-red);}
+.cmsg .cm-dot.cm-n{background:#fff;border:2px solid var(--cm-faint);}
+
+/* buttons */
+.cmsg .cm-keys{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.cmsg .cm-key{background:var(--cm-panel);border:1px solid var(--cm-line);border-radius:14px;padding:14px 16px;}
+.cmsg .cm-key .cm-kl{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.cmsg .cm-key .cm-kb{width:34px;height:34px;border-radius:9px;background:#2A2723;color:#F5F0E8;font-weight:800;
+  display:flex;align-items:center;justify-content:center;}
+.cmsg .cm-key .cm-kp{font-size:.82rem;color:var(--cm-faint);}
+.cmsg .cm-key dl{margin:0;}
+.cmsg .cm-key dt{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--cm-faint);margin-top:8px;}
+.cmsg .cm-key dd{margin:2px 0 0;color:var(--cm-text);font-size:.94rem;}
+.cmsg .cm-key dd small{display:block;color:var(--cm-dim);font-size:.84rem;margin-top:2px;}
+
+/* troubleshooting */
+.cmsg details.cm-faq{border:1px solid var(--cm-line);border-radius:12px;margin:10px 0;background:var(--cm-bg);}
+.cmsg details.cm-faq summary{cursor:pointer;padding:13px 16px;font-weight:650;list-style:none;display:flex;justify-content:space-between;gap:12px;}
+.cmsg details.cm-faq summary::-webkit-details-marker{display:none;}
+.cmsg details.cm-faq summary::after{content:"+";color:var(--cm-faint);font-weight:400;font-size:1.3rem;line-height:1;}
+.cmsg details.cm-faq[open] summary::after{content:"\2212";}
+.cmsg details.cm-faq .cm-ans{padding:0 16px 14px;color:var(--cm-dim);font-size:.95rem;}
+.cmsg details.cm-faq .cm-ans p{margin-bottom:8px;}
+.cmsg details.cm-faq .cm-ans ul{padding-left:20px;margin:6px 0;}
+.cmsg details.cm-faq .cm-ans li{margin:4px 0;}
+.cmsg .cm-inline-shot{float:right;width:190px;margin:2px 0 8px 16px;background:#000;border-radius:9px;padding:5px;}
+.cmsg .cm-inline-shot img{border-radius:5px;}
+.cmsg .cm-clear{clear:both;}
+
+/* privacy + footer */
+.cmsg .cm-privacy{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.cmsg .cm-foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--cm-line);color:var(--cm-faint);font-size:.85rem;}
+.cmsg .cm-foot p{margin-bottom:6px;}
+
+@media (max-width:760px){
+  .cmsg .cm-step{grid-template-columns:40px minmax(0,1fr);}
+  .cmsg .cm-step .cm-media{grid-column:2;max-width:340px;}
+  .cmsg .cm-helper{grid-template-columns:minmax(0,1fr);}
+  .cmsg .cm-keys{grid-template-columns:1fr;}
+}
+@media (max-width:600px){
+  .cmsg .cm-wrap{padding:28px 16px 64px;}
+  .cmsg .cm-fork,.cmsg .cm-read,.cmsg .cm-legend,.cmsg .cm-privacy{grid-template-columns:minmax(0,1fr);}
+  .cmsg .cm-step{grid-template-columns:34px minmax(0,1fr);gap:6px 12px;}
+  .cmsg .cm-num{width:30px;height:30px;font-size:.92rem;}
+  .cmsg .cm-inline-shot{float:none;width:100%;max-width:280px;margin:4px 0 10px;}
+  /* requirements table stacks: one card per row, each answer labeled */
+  .cmsg .cm-tablewrap{border:0;border-radius:0;overflow:visible;}
+  .cmsg table.cm-t thead{display:none;}
+  .cmsg table.cm-t,.cmsg table.cm-t tbody,.cmsg table.cm-t tr,.cmsg table.cm-t th,.cmsg table.cm-t td{display:block;width:100%;}
+  .cmsg table.cm-t tr{border:1px solid var(--cm-line);border-radius:12px;margin:0 0 10px;overflow:hidden;}
+  .cmsg table.cm-t tbody th{background:var(--cm-panel);border-top:0;white-space:normal;color:var(--cm-text);}
+  .cmsg table.cm-t td::before{content:attr(data-label);display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
+  .cmsg table.cm-t td.cm-tcx::before{color:var(--cm-blue-t);}
+  .cmsg table.cm-t td.cm-tcl::before{color:var(--cm-orange-t);}
+  .cmsg[data-svc="codex"] table.cm-t td.cm-tcl,.cmsg[data-svc="claude"] table.cm-t td.cm-tcx{display:none;}
+  .cmsg .cm-helper{padding:18px;}
+}
+</style>
+
+<div class="cmsg" id="cmsg">
+<div class="cm-wrap">
+
+  <header class="cm-top">
+    <span class="cm-brand">codeMeter</span><span class="cm-subtitle">Setup Guide</span>
+  </header>
+  <p class="cm-lede">Get your codeMeter showing live usage in about five minutes. Everything
+  happens on your phone. First, which service do you use?</p>
+
+  <!-- FORK -->
+  <div class="cm-fork" role="group" aria-label="Choose your service">
+    <button type="button" class="cm-pick cm-cx" data-pick="codex">
+      <span class="cm-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_normal.png" alt="codeMeter showing OpenAI Codex usage in its blue theme" width="1280" height="960"></span>
+      <span class="cm-q">Using OpenAI Codex?</span>
+      <span class="cm-d">A ChatGPT plan that includes Codex. Nothing to copy or paste: you sign in
+      with a short code shown on the device.</span>
+      <span class="cm-go">Show the Codex steps &darr;</span>
+    </button>
+    <button type="button" class="cm-pick cm-cl" data-pick="claude">
+      <span class="cm-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_normal.png" alt="codeMeter showing Claude Code usage in its orange theme" width="1280" height="960"></span>
+      <span class="cm-q">Using Claude Code?</span>
+      <span class="cm-d">A paid Claude plan, Pro or Max. You'll use a computer once to create a
+      token with <code>claude setup-token</code>.</span>
+      <span class="cm-go">Show the Claude steps &darr;</span>
+    </button>
+  </div>
+
+  <!-- REQUIREMENTS -->
+  <section class="cm-sec" id="cmsg-need">
+    <h2 class="cm-h2">What you need</h2>
+    <p class="cm-sub">Check this before you start. One device shows one service at a time, and you can switch later.</p>
+    <div class="cm-tablewrap">
+      <table class="cm-t">
+        <thead><tr><th></th><th class="cm-cxh">OpenAI Codex</th><th class="cm-clh">Claude Code</th></tr></thead>
+        <tbody>
+          <tr><th>Plan</th>
+            <td class="cm-tcx" data-label="OpenAI Codex">A ChatGPT plan that includes Codex. Verified on <b>ChatGPT Plus</b>; personal plans such as Pro use the same sign-in. Business and Enterprise workspaces are not verified yet.</td>
+            <td class="cm-tcl" data-label="Claude Code">A paid Claude plan, <b>Pro or Max</b>. Team and Enterprise accounts show a monthly usage view instead of the 5-hour and weekly bars.</td></tr>
+          <tr><th>Computer</th><td class="cm-tcx" data-label="OpenAI Codex">Not needed</td><td class="cm-tcl" data-label="Claude Code">Once, with the Claude CLI installed, to run <code>claude setup-token</code></td></tr>
+          <tr><th>Something to paste</th><td class="cm-tcx" data-label="OpenAI Codex">Nothing</td><td class="cm-tcl" data-label="Claude Code">One token</td></tr>
+          <tr><th>Phone</th><td class="cm-tcx" data-label="OpenAI Codex">Yes</td><td class="cm-tcl" data-label="Claude Code">Yes</td></tr>
+          <tr><th>Wi-Fi</th><td class="cm-tcx" data-label="OpenAI Codex">2.4 GHz with a WPA2 password</td><td class="cm-tcl" data-label="Claude Code">2.4 GHz with a WPA2 password</td></tr>
+          <tr><th>Power</th><td class="cm-tcx" data-label="OpenAI Codex">Any USB-C cable and charger</td><td class="cm-tcl" data-label="Claude Code">Any USB-C cable and charger</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="cm-sec" id="cmsg-steps">
+    <h2 class="cm-h2">Set it up</h2>
+    <p class="cm-sub">Steps 1 to 3 are the same for both services.</p>
+    <div class="cm-pathbar">
+      <span>Showing steps for:</span>
+      <button type="button" class="cm-cx" data-pick="codex">OpenAI Codex</button>
+      <button type="button" class="cm-cl" data-pick="claude">Claude Code</button>
+      <button type="button" class="cm-both" data-pick="both">Both</button>
+    </div>
+
+    <div class="cm-step cm-first">
+      <div class="cm-num">1</div>
+      <div>
+        <h3>Plug in and join its Wi-Fi</h3>
+        <p>Power codeMeter with a USB-C cable. After a moment it shows <b>STEP 1 of 2</b> with a QR code.</p>
+        <p>Scan that QR with your phone's camera to join the device's Wi-Fi, or join the network
+        <b>codeMeter-XXXXXX</b> by hand in your phone's Wi-Fi settings (the exact name is on the screen).</p>
+      </div>
+      <div class="cm-media">
+        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard1.png" alt="STEP 1 of 2 screen with a Wi-Fi QR code and the codeMeter network name" width="1280" height="960" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="cm-step">
+      <div class="cm-num">2</div>
+      <div>
+        <h3>Open the setup page</h3>
+        <p>Once your phone joins, the screen turns green (<b>STEP 2 of 2</b>) and a setup page usually
+        opens by itself. If it doesn't, scan the new QR or open <code>http://192.168.4.1</code> in your
+        phone's browser.</p>
+        <p>Tap <b>Setup Device</b>.</p>
+        <div class="cm-tip">No page? Some phones hide it while private DNS or a VPN is on. Type
+        <code>http://192.168.4.1</code> into the browser yourself.</div>
+      </div>
+      <div class="cm-media">
+        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/onboard2.png" alt="STEP 2 of 2 screen showing the address 192.168.4.1" width="1280" height="960" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="cm-step">
+      <div class="cm-num">3</div>
+      <div>
+        <h3>Pick your service and your home Wi-Fi</h3>
+        <ol>
+          <li>Choose your home Wi-Fi from the list and enter its password.</li>
+          <li>Under <b>"Which do you use?"</b> tap
+            <span class="cm-only-codex"><b>OpenAI Codex</b></span><span class="cm-only-unpicked"> or </span><span class="cm-only-claude"><b>Claude Code</b></span>.</li>
+        </ol>
+        <p class="cm-only-codex"><span class="cm-tag cm-cx">Codex</span> The token box disappears. Tap <b>Save</b>. That's all for the setup page.</p>
+        <p class="cm-only-claude"><span class="cm-tag cm-cl">Claude</span> Leave the page open. You'll paste a token into the <b>Claude token</b> box next (step 4).</p>
+      </div>
+      <div class="cm-media">
+        <div class="cm-phone cm-only-codex"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_codex.png" alt="Setup page with OpenAI Codex selected and no token box" width="760" height="1216" loading="lazy"></div>
+        <div class="cm-phone cm-only-claude"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/portal_setup_claude.png" alt="Setup page with Claude Code selected and the Claude token box" width="760" height="1519" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- CODEX PATH -->
+    <div class="cm-step cm-cxs cm-only-codex" id="cmsg-codex">
+      <div class="cm-num">4</div>
+      <div>
+        <span class="cm-tag cm-cx">Codex</span>
+        <h3>Wait for the blue SIGN IN screen</h3>
+        <p>After you tap Save, codeMeter restarts, joins your Wi-Fi, and shows a blue <b>SIGN IN</b>
+        screen with a QR code and a short code like:</p>
+        <span class="cm-bigcode">KQX4-7HRTM</span>
+        <p>The code is good for <b>15 minutes</b>. A countdown at the bottom shows the time left.</p>
+        <p>Your phone drops off the codeMeter Wi-Fi when the device restarts. Make sure it's back on your
+        normal Wi-Fi or mobile data before step 5.</p>
+      </div>
+      <div class="cm-media">
+        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login.png" alt="Blue Codex SIGN IN screen with a QR code, the address auth.openai.com/codex/device and a sign-in code" width="1280" height="960" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="cm-step cm-cxs cm-only-codex">
+      <div class="cm-num">5</div>
+      <div>
+        <span class="cm-tag cm-cx">Codex</span>
+        <h3>Sign in to ChatGPT on your phone</h3>
+        <ol>
+          <li>Scan the QR on the screen, or open <a href="https://auth.openai.com/codex/device" target="_blank" rel="noopener"><b>auth.openai.com/codex/device</b></a>.</li>
+          <li>Sign in to the ChatGPT account that has Codex.</li>
+          <li>Type the code exactly as shown on codeMeter, then approve.</li>
+        </ol>
+        <div class="cm-tip cm-cx">You sign in on OpenAI's own page. codeMeter never sees your ChatGPT password.</div>
+      </div>
+      <div class="cm-media"></div>
+    </div>
+
+    <div class="cm-step cm-cxs cm-only-codex">
+      <div class="cm-num">6</div>
+      <div>
+        <span class="cm-tag cm-cx">Codex</span>
+        <h3>"You're all set"</h3>
+        <p>Within a few seconds the screen says <b>You're all set</b> and your <b>5h limit</b> and
+        <b>Weekly limit</b> appear. They refresh every 60 seconds.</p>
+        <p>If the code runs out first, the screen says <b>Sign-in code expired</b>. Press <b>B</b> for a
+        new code.</p>
+      </div>
+      <div class="cm-media">
+        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login_done.png" alt="Codex screen reading You're all set, Loading your Codex usage" width="1280" height="960" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- CLAUDE PATH -->
+    <div class="cm-step cm-cls cm-only-claude" id="cmsg-claude">
+      <div class="cm-num">4</div>
+      <div>
+        <span class="cm-tag cm-cl">Claude</span>
+        <h3>Get your Claude token (on a computer)</h3>
+        <p>On a computer with the <b>Claude CLI</b> installed, open a terminal (Terminal on Mac, Command
+        Prompt or PowerShell on Windows) and run:</p>
+        <div class="cm-cmd"><code id="cmsg-cmd">claude setup-token</code><button type="button" class="cm-btn" id="cmsg-copy">Copy</button></div>
+        <p>It opens a browser to log in to Claude, then prints a long token starting with
+        <code>sk-ant-oat01-</code>. Copy the whole thing. You only do this once.</p>
+      </div>
+      <div class="cm-media"></div>
+    </div>
+
+    <div class="cm-step cm-cls cm-only-claude">
+      <div class="cm-num">5</div>
+      <div>
+        <span class="cm-tag cm-cl">Claude</span>
+        <h3>Get the token onto the device, then Save</h3>
+        <p>Pick whichever is easier:</p>
+        <ol>
+          <li><b>Paste it.</b> Get the token to your phone (for example, email or message it to yourself),
+          paste it into the <b>Claude token</b> box on the setup page, and tap <b>Save</b>.</li>
+          <li><b>Scan it.</b> Use the <a href="#cmsg-helper">token QR helper</a> below on your computer.
+          It turns the token into a QR code that your phone sends straight to codeMeter.</li>
+        </ol>
+        <p>codeMeter restarts and shows your <b>Session (5h)</b> and <b>Weekly (7d)</b> usage within
+        about a minute. It refreshes every 60 seconds.</p>
+      </div>
+      <div class="cm-media">
+        <div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_normal.png" alt="Orange Claude usage screen with session and weekly cards" width="1280" height="960" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="cm-done">You're done. After setup, codeMeter runs on its own. No phone or computer needs to stay on.</div>
+  </section>
+
+  <!-- TOKEN HELPER -->
+  <section class="cm-sec cm-only-claude" id="cmsg-helper">
+    <h2 class="cm-h2">Claude token QR helper</h2>
+    <p class="cm-sub">For Claude Code only. Codex users don't need this: Codex signs in on the device itself.</p>
+    <div class="cm-helper">
+      <div>
+        <h3>Paste your token, scan the QR</h3>
+        <ol>
+          <li>Run <code>claude setup-token</code> and copy the token it prints.</li>
+          <li>Paste it into the box below. A QR code appears as soon as it looks right.</li>
+          <li>With your phone <b>on the codeMeter-XXXXXX Wi-Fi</b>, scan the QR with the camera and open the link.</li>
+        </ol>
+        <p>Your phone shows <b>All set</b> if the device already has your home Wi-Fi (it restarts and starts
+        showing usage), or <b>Token saved</b> if it doesn't yet. In that case, go back to the setup page,
+        finish your Wi-Fi with <b>Claude Code</b> picked, leave the token box empty, and tap Save.</p>
+        <label for="cmsg-token" style="font-weight:600;font-size:.9rem;color:#F5F0E8;">Claude token</label>
+        <textarea id="cmsg-token" placeholder="sk-ant-oat01-..." autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+        <div class="cm-warn" id="cmsg-warn" role="status"></div>
+        <div class="cm-lock"><b>Private</b><span>Your token never leaves this page. The QR code is made right
+        here in your browser. Nothing is uploaded or saved.</span></div>
+      </div>
+      <div>
+        <div class="cm-qr cm-empty" id="cmsg-qr">The QR code appears here once you paste a token.</div>
+        <div class="cm-qrcap" id="cmsg-qrcap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- READING THE SCREEN -->
+  <section class="cm-sec" id="cmsg-read">
+    <h2 class="cm-h2">Reading the screen</h2>
+    <p class="cm-sub">Two cards: your 5-hour window on top and your weekly window below. Each shows the
+    percentage used, a bar, and when that window resets.</p>
+    <div class="cm-read">
+      <figure class="cm-only-codex"><div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_usage_alert.png" alt="Codex usage with the 5h limit in red and the weekly limit in amber" width="1280" height="960" loading="lazy"></div>
+        <figcaption class="cm-cap">Codex: blue <code>&gt;_ codex</code> theme</figcaption></figure>
+      <figure class="cm-only-claude"><div class="cm-screen"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/usage_alert.png" alt="Claude usage with the session card in red and the weekly card in amber" width="1280" height="960" loading="lazy"></div>
+        <figcaption class="cm-cap">Claude: orange codeMeter theme</figcaption></figure>
+    </div>
+    <div class="cm-legend">
+      <div class="cm-card">
+        <h4>Pace: am I using it too fast?</h4>
+        <p>The bar itself <b>never changes color</b>. Pace shows in the <b>percentage number</b>, the
+        <b>card outline and corner dot</b>, and the <b>thin time line</b> under the bar (how much of the
+        window has passed).</p>
+        <ul>
+          <li><span class="cm-dot cm-n"></span><span><b>Normal colors:</b> on pace.</span></li>
+          <li><span class="cm-dot cm-a"></span><span><b>Amber:</b> you're using this limit faster than the clock.</span></li>
+          <li><span class="cm-dot cm-r"></span><span><b>Red:</b> clearly overspending, likely to hit the limit before it resets.</span></li>
+        </ul>
+      </div>
+      <div class="cm-card">
+        <h4>Status dot (top right)</h4>
+        <ul>
+          <li><span class="cm-dot cm-g"></span><span><b>Green:</b> connected, numbers are current.</span></li>
+          <li><span class="cm-dot cm-a"></span><span><b>Amber:</b> still connecting, or briefly rate-limited. It sorts itself out.</span></li>
+          <li><span class="cm-dot cm-r"></span><span><b>Red:</b> an error. See troubleshooting below.</span></li>
+        </ul>
+        <p style="margin-top:8px">Codex screens are <b>blue</b> with a <code>&gt;_ codex</code> wordmark. Claude
+        screens are <b>orange</b>. Hold <b>A</b> to see the Status screen, which names the service
+        (for example "Codex (plus)").</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="cm-sec" id="cmsg-buttons">
+    <h2 class="cm-h2">The three buttons</h2>
+    <p class="cm-sub">Left to right under the screen: A, B, C.</p>
+    <div class="cm-keys">
+      <div class="cm-key">
+        <div class="cm-kl"><span class="cm-kb">A</span><span class="cm-kp">left</span></div>
+        <dl><dt>Tap</dt><dd>Light / dark</dd>
+        <dt>Hold</dt><dd>Status screen<small>Firmware, Wi-Fi, service, updates. Let go to return.</small></dd></dl>
+      </div>
+      <div class="cm-key">
+        <div class="cm-kl"><span class="cm-kb">B</span><span class="cm-kp">middle</span></div>
+        <dl><dt>Tap</dt><dd>Brightness</dd>
+        <dt>Hold about 7 s</dt><dd>Log in again<small>The screen says 5 s: keep holding past the orange RE-ONBOARD screen. Your Wi-Fi is kept.</small></dd></dl>
+      </div>
+      <div class="cm-key">
+        <div class="cm-kl"><span class="cm-kb">C</span><span class="cm-kp">right</span></div>
+        <dl><dt>Tap</dt><dd>Screen on / off</dd>
+        <dt>Hold about 7 s</dt><dd>Factory reset / switch service<small>Keep holding past the red RESET screen. Wipes Wi-Fi and login, then starts setup again.</small></dd></dl>
+      </div>
+    </div>
+    <div class="cm-tip">Let go early on the RE-ONBOARD or RESET screen to cancel. To switch between Codex and Claude,
+    hold C to reset, then pick the other service in step 3.</div>
+  </section>
+
+  <!-- TROUBLESHOOTING -->
+  <section class="cm-sec" id="cmsg-help">
+    <h2 class="cm-h2">Troubleshooting</h2>
+    <p class="cm-sub">Tap a question to open it.</p>
+
+    <details class="cm-faq">
+      <summary>It won't join my Wi-Fi ("WiFi connect failed")</summary>
+      <div class="cm-ans">
+        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/wifi_error.png" alt="WIFI ERROR screen: WiFi connect failed, hold button C 5s to reconfigure" width="1280" height="960" loading="lazy"></div>
+        <p>codeMeter needs <b>2.4 GHz Wi-Fi with a WPA2 password</b>. It can't join 5 GHz-only or WPA3-only
+        networks. Most routers also broadcast a 2.4 GHz network, sometimes under a separate name.</p>
+        <p>Check the password, then hold <b>C</b> about 7 seconds to start setup over.</p>
+        <div class="cm-clear"></div>
+      </div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>The setup page didn't open on my phone</summary>
+      <div class="cm-ans"><p>Stay joined to <b>codeMeter-XXXXXX</b> and open <code>http://192.168.4.1</code>
+      in your browser. If your phone warns that the network has no internet, choose to stay connected.
+      Turning off a VPN or private DNS for a minute can help.</p></div>
+    </details>
+
+    <details class="cm-faq cm-only-codex">
+      <summary><span><span class="cm-tag cm-cx">Codex</span> "Sign-in code expired"</span></summary>
+      <div class="cm-ans">
+        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_login_expired.png" alt="Codex SIGN IN screen: Sign-in code expired, press B for a new code" width="1280" height="960" loading="lazy"></div>
+        <p>Codes last 15 minutes. Press <b>B</b> for a new code, then repeat step 5.</p>
+        <p>B only gets a new code from this screen or the "Can't reach OpenAI" screen. While a code is still
+        on screen, just use it.</p>
+        <div class="cm-clear"></div>
+      </div>
+    </details>
+
+    <details class="cm-faq cm-only-codex">
+      <summary><span><span class="cm-tag cm-cx">Codex</span> "Can't reach OpenAI"</span></summary>
+      <div class="cm-ans">
+        <p>The device is on your Wi-Fi but can't reach OpenAI's sign-in servers. It retries on its own;
+        press <b>B</b> to retry now.</p>
+        <p>If it keeps happening, an ad blocker or filtering DNS (Pi-hole, AdGuard, NextDNS, a parental-control
+        router) is likely blocking it. Allow <code>auth.openai.com</code> and <code>chatgpt.com</code>.</p>
+      </div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>"Codex login expired" or "Claude login expired"</summary>
+      <div class="cm-ans">
+        <div class="cm-inline-shot"><img src="https://cdn.jsdelivr.net/gh/bricekevin/sm-listing-img@main/codemeter-setup/codex_reauth.png" alt="ACTION NEEDED screen: Codex login expired, hold button B 5s to log in again" width="1280" height="960" loading="lazy"></div>
+        <p>The saved login stopped working, so usage updates have paused. Hold <b>B</b> about 7 seconds
+        (keep holding past RE-ONBOARD). Your Wi-Fi is kept.</p>
+        <ul>
+          <li><b>Codex:</b> the device goes straight to a new SIGN IN screen. Repeat steps 4 to 6. It normally
+          renews its own login, so this should be rare.</li>
+          <li><b>Claude:</b> the setup Wi-Fi comes back. Rejoin <b>codeMeter-XXXXXX</b>, run
+          <code>claude setup-token</code> again, and paste or scan the new token.</li>
+        </ul>
+        <div class="cm-clear"></div>
+      </div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>The clock shows the wrong time</summary>
+      <div class="cm-ans"><p>codeMeter sets its time zone automatically from your internet connection using
+      <code>ip-api.com</code>. If you use an ad blocker or filtering DNS, allow <code>ip-api.com</code>,
+      then unplug codeMeter and plug it back in.</p></div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>The bars are blank or the status dot stays red</summary>
+      <div class="cm-ans">
+        <ul>
+          <li>Hold <b>A</b> and check the Status screen: is Wi-Fi connected, and is the right service listed?</li>
+          <li>Confirm your plan is supported (see <a href="#cmsg-need">What you need</a>). Codex on a Business or
+          Enterprise workspace is not verified yet and may leave the bars blank.</li>
+          <li>Filtering DNS or ad blockers can block the service. Codex needs <code>chatgpt.com</code>;
+          Claude needs <code>api.anthropic.com</code>.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>How do I switch from Codex to Claude, or back?</summary>
+      <div class="cm-ans"><p>Hold <b>C</b> about 7 seconds (keep holding past RESET). codeMeter wipes its settings
+      and starts setup again. Follow steps 1 to 3 and pick the other service.</p></div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>Does it update itself? Something went badly wrong</summary>
+      <div class="cm-ans"><p>Yes. It checks for firmware updates every 6 hours and installs them over Wi-Fi.
+      If the device won't start at all, a USB recovery flasher is at
+      <a href="https://bricekevin.github.io/fw/" target="_blank" rel="noopener">bricekevin.github.io/fw</a>
+      (use Chrome or Edge on a computer). Or email us and we'll help.</p></div>
+    </details>
+
+    <details class="cm-faq">
+      <summary>I lost the device or I'm giving it away</summary>
+      <div class="cm-ans">
+        <p>Hold <b>C</b> about 7 seconds to wipe it. If it's out of your hands, cut off its access from your account:</p>
+        <ul>
+          <li><b>Codex:</b> in your ChatGPT account's security settings (for example, log out of all devices).</li>
+          <li><b>Claude:</b> in your Claude account settings, revoke the token.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="cm-sec" id="cmsg-privacy">
+    <h2 class="cm-h2">Privacy</h2>
+    <div class="cm-privacy">
+      <div class="cm-card">
+        <h4>Your login stays on the device</h4>
+        <p>Your ChatGPT sign-in or Claude token is stored only on codeMeter. There's no Encinitas 3D
+        server and no account with us. The token helper on this page runs entirely in your browser.</p>
+      </div>
+      <div class="cm-card">
+        <h4>What it connects to</h4>
+        <p><b>OpenAI</b> (Codex) or <b>Anthropic</b> (Claude) for your usage, <b>GitHub</b> for firmware
+        updates, <b>internet time servers</b>, and <b>ip-api.com</b> for your time zone. Nothing else.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="cm-foot">
+    <p>Stuck? Email <a href="mailto:info@encinitas3d.com"><b>info@encinitas3d.com</b></a>. We're happy to help.</p>
+    <p>codeMeter is independent hardware by Encinitas 3D. It is not affiliated with or endorsed by OpenAI or
+    Anthropic. OpenAI, ChatGPT and Codex are trademarks of OpenAI; Claude is a trademark of Anthropic.</p>
+  </footer>
+
+</div>
+</div>
+
+<script>
+// Kazuhiko Arase's QR Code Generator (MIT), vendored from pairing/index.html.
+// Wrapped so it adds a single global (window.cmsgQRCode) and cannot clash with
+// another qrcode library a WordPress theme or plugin might load.
+(function () {
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(row * cellSize, col * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+window.cmsgQRCode = qrcode;
+})();
+</script>
+<script>
+// codeMeter setup guide: service picker + Claude token QR helper.
+// Everything runs in the browser; the token is never sent anywhere.
+(function () {
+  var root = document.getElementById("cmsg");
+  if (!root) return;
+
+  // --- service picker -------------------------------------------------
+  // Picking a service hides the other path's steps. #codex / #claude in the
+  // URL preselects one, so support replies can link straight to a path.
+  function setSvc(svc, scroll) {
+    if (svc === "codex" || svc === "claude" || svc === "both") root.setAttribute("data-svc", svc);
+    else root.removeAttribute("data-svc");
+    if (history.replaceState) {
+      history.replaceState(null, "", (svc === "codex" || svc === "claude") ? "#" + svc : location.pathname + location.search);
+    }
+    if (scroll) {
+      var s = document.getElementById("cmsg-steps");
+      if (s && s.scrollIntoView) s.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+  var picks = root.querySelectorAll("[data-pick]");
+  for (var i = 0; i < picks.length; i++) {
+    picks[i].addEventListener("click", function (e) {
+      var inFork = !!(e.currentTarget.className.indexOf("cm-pick") !== -1);
+      setSvc(e.currentTarget.getAttribute("data-pick"), inFork);
+    });
+  }
+  var h = (location.hash || "").replace("#", "");
+  if (h === "codex" || h === "claude") setSvc(h, false);
+
+  // --- copy button ----------------------------------------------------
+  var copyBtn = document.getElementById("cmsg-copy");
+  if (copyBtn) copyBtn.addEventListener("click", function () {
+    var text = document.getElementById("cmsg-cmd").textContent;
+    function done() {
+      copyBtn.textContent = "Copied";
+      setTimeout(function () { copyBtn.textContent = "Copy"; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, done);
+    } else { done(); }
+  });
+
+  // --- token QR helper (same logic as pairing/index.html) -------------
+  // The QR encodes a URL on the device's fixed setup-Wi-Fi address; a phone
+  // on that Wi-Fi opens it and hands the token to the device.
+  var DEVICE_URL = "http://192.168.4.1/cred";
+  var tokenEl = document.getElementById("cmsg-token");
+  var qrEl    = document.getElementById("cmsg-qr");
+  var capEl   = document.getElementById("cmsg-qrcap");
+  var warnEl  = document.getElementById("cmsg-warn");
+  var makeQR  = window.cmsgQRCode;
+  if (!tokenEl || !qrEl || !makeQR) return;
+
+  function showEmpty(msg) {
+    qrEl.className = "cm-qr cm-empty";
+    qrEl.textContent = msg;
+    capEl.textContent = "";
+  }
+
+  // Reduce whatever was pasted to the one credential the device needs:
+  //   sk-ant-...            Claude token, as-is
+  //   rt.1....              Codex refresh token, as-is
+  //   {"tokens":{...}}      Codex auth.json -> its refresh_token
+  // Returns {token, kind} with kind "claude" | "codex" | "" (unrecognised).
+  function extractCredential(raw) {
+    var t = raw.trim();
+    if (t.charAt(0) === "{") {
+      var rt = "";
+      try {
+        var j = JSON.parse(t);
+        rt = (j.tokens && j.tokens.refresh_token) || j.refresh_token || "";
+      } catch (e) {
+        var m = t.match(/"refresh_token"\s*:\s*"([^"]+)"/);
+        if (m) rt = m[1];
+      }
+      return rt ? { token: rt, kind: "codex" } : { token: t, kind: "" };
+    }
+    if (t.indexOf("sk-ant-") === 0) return { token: t, kind: "claude" };
+    if (t.indexOf("rt.") === 0)     return { token: t, kind: "codex" };
+    return { token: t, kind: "" };
+  }
+
+  function render() {
+    var raw = tokenEl.value.trim();
+    warnEl.textContent = "";
+    if (!raw) {
+      showEmpty("The QR code appears here once you paste a token.");
+      return;
+    }
+    var cred = extractCredential(raw);
+    if (!cred.kind) {
+      warnEl.textContent =
+        "That doesn't look like a Claude token (it should start with “sk-ant-”). " +
+        "Double-check what you pasted.";
+    }
+    var url = DEVICE_URL + "?t=" + encodeURIComponent(cred.token);
+    try {
+      var qr = makeQR(0, "L");      // 0 = auto-size, L = roomy / easy to scan
+      qr.addData(url);
+      qr.make();
+      qrEl.className = "cm-qr";
+      qrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 2 });
+      capEl.textContent = (cred.kind === "codex" ? "Codex refresh token. " : "") +
+                          "Scan with a phone on the codeMeter Wi-Fi. Opens " + DEVICE_URL;
+    } catch (e) {
+      showEmpty("That token is too long to fit in a QR code. Re-run the command and try again.");
+    }
+  }
+  tokenEl.addEventListener("input", render);
+  render();
+})();
+</script>
