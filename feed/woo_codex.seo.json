@@ -1,7 +1,7 @@
 {
  "CMX-CODEX": {
-  "focus": "Codex Usage Meter",
-  "meta": "Codex Usage Meter for your desk: see your OpenAI Codex 5-hour and weekly limits live, with pace warnings. Phone setup, no computer needed.",
+  "focus": "OpenAI Codex Usage Meter",
+  "meta": "OpenAI Codex Usage Meter for your desk: see your ChatGPT plan's Codex 5-hour and weekly limits live, with pace warnings. Phone setup, no computer.",
   "aioseo_rest": {
    "endpoint": "POST /wp-json/aioseo/v1/post",
    "header": "X-WP-Nonce: <window.aioseo.nonce>",
@@ -9,11 +9,11 @@
     "id": "<product id after import>",
     "keyphrases": {
      "focus": {
-      "keyphrase": "Codex Usage Meter"
+      "keyphrase": "OpenAI Codex Usage Meter"
      },
      "additional": []
     },
-    "description": "Codex Usage Meter for your desk: see your OpenAI Codex 5-hour and weekly limits live, with pace warnings. Phone setup, no computer needed."
+    "description": "OpenAI Codex Usage Meter for your desk: see your ChatGPT plan's Codex 5-hour and weekly limits live, with pace warnings. Phone setup, no computer."
    }
   }
  }
